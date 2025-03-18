@@ -1,45 +1,79 @@
-import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../view_model/session_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../resources/routes/routes_name.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SessionController extends GetxController {
-  // var currentSession = Rx<Session?>(null);
-  // var currentSession = Rx<Session>(Session.fromJson('sessionName': 'Session 1','lessons': [],));
-  var currentSession = Rx<Session>(Session.fromJson({
-    'sessionName': 'sessions1',
-    'lessons': [{
-      "lessonName": "Football",
-      "imageAsset": "lib/resources/assets/study/images/football.jpg",
-      "animationAsset": "lib/resources/assets/study/animations/football.lottie",
-      "audioAsset": "lib/resources/assets/study/audio/football.mp3"
-    },
-      {
-        "lessonName": "Football",
-        "imageAsset": "lib/resources/assets/study/images/dj.jpg",
-        "animationAsset": "lib/resources/assets/study/animations/football.lottie",
-        "audioAsset": "lib/resources/assets/study/audio/football.mp3"
-      }],
-  }));
+  var currentSessions = <String, int>{}.obs;  // Store session progress for each category
+  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final String userId = "user_id"; // Replace with actual user ID from FirebaseAuth
 
-
-
-  var currentLessonIndex = 0.obs;
-
-  // Load the session data from assets (for the first few sessions)
-  Future<void> loadSession(String sessionFileName) async {
-    try {
-      String jsonString = await rootBundle.loadString('assets/study/sessions/$sessionFileName.json');
-      Map<String, dynamic> sessionJson = json.decode(jsonString);
-      currentSession.value = Session.fromJson(sessionJson);
-    } catch (e) {
-      print('Error loading session: $e');
-    }
+  @override
+  void onInit() {
+    super.onInit();
+    loadSessions(); // Load session data when the app starts
   }
+
+  /// Load session progress from SharedPreferences
+  Future<void> loadSessions() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> categories = ["Study", "Social Skills", "Emotion"]; // Add all categories
+
+    for (var category in categories) {
+      int session = prefs.getInt('session_$category') ?? 1; // Default session is 1
+      currentSessions[category] = session;
+    }
+
+    // await fetchSessionsFromFirebase(); // Fetch session progress from Firebase
+  }
+
+  /// Save session progress locally
+  Future<void> saveSession(String category, int sessionNumber) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('session_$category', sessionNumber);
+    currentSessions[category] = sessionNumber;
+
+    // if (sessionNumber % 5 == 0) {
+    //   updateSessionInFirebase(category, sessionNumber); // Sync every 5 sessions
+    // }
+  }
+
+  /// Fetch session progress from Firebase when logging in on a new device
+  // Future<void> fetchSessionsFromFirebase() async {
+  //   var doc = await _firestore.collection('userProgress').doc(userId).get();
+  //
+  //   if (doc.exists) {
+  //     Map<String, dynamic> data = doc.data()!;
+  //     data.forEach((category, session) {
+  //       currentSessions[category] = session; // Update local session values
+  //     });
+  //
+  //     // Save fetched sessions to SharedPreferences
+  //     final prefs = await SharedPreferences.getInstance();
+  //     data.forEach((category, session) {
+  //       prefs.setInt('session_$category', session);
+  //     });
+  //   }
+  // }
+
+  /// Update Firebase with the latest session progress
+  // Future<void> updateSessionInFirebase(String category, int sessionNumber) async {
+  //   await _firestore.collection('userProgress').doc(userId).set(
+  //     {category: sessionNumber}, SetOptions(merge: true),
+  //   );
+  // }
+
+  /// Start the session for the selected category
+  void startSession(String category) {
+    int session = currentSessions[category] ?? 1;
+    Get.toNamed(RoutesName.sessionPage, arguments: {'category': category, 'session': session});
+  }
+  var currentLessonIndex = 0.obs;
 
   // Move to next lesson in the session
   void goToNextLesson() {
-    if (currentSession.value != null && currentLessonIndex.value < currentSession.value!.lessons.length - 1) {
+    if (currentSessions.value != null && currentLessonIndex.value < currentSessions.value!.length - 1) {
       currentLessonIndex.value++;
     }
   }

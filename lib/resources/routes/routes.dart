@@ -1,3 +1,4 @@
+import 'package:blossoms_kids/screens/sessionScreen/views/session_page.dart';
 import 'package:get/get.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/login_screen.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/signup_screen.dart';
@@ -22,6 +23,12 @@ import '../../screens/base/views/base_view.dart';
 class AppRoutes {
 
   static appRoutes () => [
+    GetPage(
+
+      name: RoutesName.learnScreen,
+      page: () => LearnScreenView(),
+    ),
+
     GetPage(
         name: RoutesName.baseView,
         page: () => BaseView(),
@@ -48,11 +55,11 @@ class AppRoutes {
     ),
 
 
-    GetPage(
-
-        name: RoutesName.learnScreen,
-        page: () => LearnScreenView(),
-    ),
+    // GetPage(
+    //
+    //     name: RoutesName.learnScreen,
+    //     page: () => LearnScreenView(),
+    // ),
 
     GetPage(
         name: RoutesName.practiceScreen,
@@ -113,6 +120,11 @@ class AppRoutes {
     GetPage(
         name: RoutesName.socialAndCommunicationSkill,
         page: () => SocialSkillScreen(),
+    ),
+
+    GetPage(
+      name: RoutesName.sessionPage,
+      page: () => SessionPage(),
     ),
   ];
 }

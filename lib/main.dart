@@ -1,5 +1,6 @@
 import 'package:blossoms_kids/screens/base/views/base_view.dart';
 import 'package:blossoms_kids/screens/learnScreen/views/learnScreenView.dart';
+import 'package:blossoms_kids/screens/sessionScreen/views/session_page.dart';
 import 'package:blossoms_kids/screens/sessionScreen/views/session_view.dart';
 import 'package:blossoms_kids/screens/test/test.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +35,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
 
-      // getPages: AppRoutes.appRoutes(),
-      home: SessionView(),
+      getPages: AppRoutes.appRoutes(),
+      // home: LearnScreenView(),
     );
   }
 }
