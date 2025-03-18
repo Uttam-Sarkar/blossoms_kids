@@ -1,0 +1,17 @@
+{
+  "sessionName": "Session 1",
+  "lessons": [
+    {
+      "lessonName": "Football",
+      "imageAsset": "assets/study/images/football.jpg",
+      "animationAsset": "assets/study/animations/football.lottie",
+      "audioAsset": "assets/study/audio/football.mp3"
+    },
+    {
+      "lessonName": "Dog",
+      "imageAsset": "assets/study/images/dog.jpg",
+      "animationAsset": "assets/study/animations/dog.lottie",
+      "audioAsset": "assets/study/audio/dog.mp3"
+    }
+  ]
+}
