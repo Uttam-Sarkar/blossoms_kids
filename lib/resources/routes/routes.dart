@@ -1,4 +1,5 @@
 import 'package:blossoms_kids/screens/sessionScreen/views/session_page.dart';
+import 'package:blossoms_kids/screens/sessionScreen/views/session_view.dart';
 import 'package:get/get.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/login_screen.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/signup_screen.dart';
@@ -124,7 +125,7 @@ class AppRoutes {
 
     GetPage(
       name: RoutesName.sessionPage,
-      page: () => SessionPage(),
+      page: () => SessionView(),
     ),
   ];
 }

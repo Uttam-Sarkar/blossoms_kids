@@ -15,7 +15,7 @@ class RoutesName {
   static const String balloonBlast = '/balloon_blast';
   static const String livingSkill = '/living_skill';
   static const String family = '/family';
-  static const String study = '/study';
+  static const String study = '/Study';
   static const String emotion = '/emotion';
   static const String profession = '/profession';
   static const String music = '/music';

@@ -1,38 +1,63 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../resources/routes/routes_name.dart';
+import '../view_model/session_model.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SessionController extends GetxController {
-  var currentSessions = <String, int>{}.obs;  // Store session progress for each category
+  var currentSessionLevel = <String, int>{}.obs;
+  var totalSession =  <String, int>{}.obs;
+  var currentLessonIndex = 0.obs;
+  var currentCategory = 'Study';
+  int lessonLength = 0;
   // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String userId = "user_id"; // Replace with actual user ID from FirebaseAuth
 
   @override
   void onInit() {
     super.onInit();
-    loadSessions(); // Load session data when the app starts
+    loadAllSessionLevel(); // Load session data when the app starts
+  }
+/// Get total session under a category
+  Future<int> getTotalSessions(String category) async {
+    try {
+      String jsonString = await rootBundle.loadString("lib/resources/assets/$category/sessions/totalSession.json");
+      Map<String, dynamic> jsonData = jsonDecode(jsonString);
+
+      return jsonData["total_session"];
+    } catch (e) {
+      print("Error loading session index: $e");
+      return 0;
+    }
   }
 
+
   /// Load session progress from SharedPreferences
-  Future<void> loadSessions() async {
+  Future<void> loadAllSessionLevel() async {
     final prefs = await SharedPreferences.getInstance();
     List<String> categories = ["Study", "Social Skills", "Emotion"]; // Add all categories
 
     for (var category in categories) {
-      int session = prefs.getInt('session_$category') ?? 1; // Default session is 1
-      currentSessions[category] = session;
+      int sessionLevel = prefs.getInt('session_$category') ?? 1;// Default sessionLevel is 1
+      var totalSessions = await getTotalSessions(category);
+      currentSessionLevel[category] = sessionLevel;
+      totalSession[category] = totalSessions;
     }
 
-    // await fetchSessionsFromFirebase(); // Fetch session progress from Firebase
+    // await fetchSessionsFromFirebase(); // Fetch sessionLevel progress from Firebase
   }
 
   /// Save session progress locally
   Future<void> saveSession(String category, int sessionNumber) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('session_$category', sessionNumber);
-    currentSessions[category] = sessionNumber;
+    currentSessionLevel[category] = sessionNumber;
 
     // if (sessionNumber % 5 == 0) {
     //   updateSessionInFirebase(category, sessionNumber); // Sync every 5 sessions
@@ -65,16 +90,81 @@ class SessionController extends GetxController {
   // }
 
   /// Start the session for the selected category
-  void startSession(String category) {
-    int session = currentSessions[category] ?? 1;
-    Get.toNamed(RoutesName.sessionPage, arguments: {'category': category, 'session': session});
+  // void startSession(String category) {
+  //   int session = currentSessionLevel[category] ?? 1;
+  //
+  //
+  //   Get.toNamed(RoutesName.sessionPage, arguments: {'category': category, 'session': sessionLevel});
+  // }
+
+  var currentSession = Rxn<Session>(); // Holds the current session data
+
+  /// Load a session from assets
+  Future<void> startSession(String category) async {
+    currentLessonIndex.value = 0;
+    currentCategory = category;
+    int sessionLevel = currentSessionLevel[category] ?? 1;
+    print('sessionLevel = $sessionLevel');
+    print('currentCategory = $currentCategory');
+    try {
+      // Load JSON file
+      String jsonString = await rootBundle.loadString("lib/resources/assets/$category/sessions/sessions$sessionLevel.json");
+      Map<String, dynamic> jsonData = jsonDecode(jsonString);
+
+      // Convert JSON to Session object and update state
+      currentSession.value = Session.fromJson(jsonData);
+      lessonLength = currentSession.value!.lessons.length;
+
+      Get.toNamed(RoutesName.sessionPage, arguments: {'category': category, 'sessionLevel': sessionLevel, 'currentSession' : currentSession});
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error loading session: $e");
+      }
+    }
   }
-  var currentLessonIndex = 0.obs;
+
+
+
+  // var currentLessonIndex = 0.obs;
 
   // Move to next lesson in the session
-  void goToNextLesson() {
-    if (currentSessions.value != null && currentLessonIndex.value < currentSessions.value!.length - 1) {
+  // void goToNextSesson() {
+  //   if (currentSessionLevel.value != null && currentLessonIndex.value < lessonLength - 1) {
+  //     currentLessonIndex.value++;
+  //   }
+  // }
+  //
+  // // Move to previous lesson in the session
+  // void goToPreviousSession() {
+  //   if (currentLessonIndex.value > 0) {
+  //     currentLessonIndex.value--;
+  //   }
+  // }
+
+
+
+  Future<void> goToNextLesson() async {
+    if(currentLessonIndex.value == lessonLength - 1){
+      // go to next session
+      // if (currentSessionLevel.value != null && currentLessonIndex.value < lessonLength - 1) {
+      //   currentLessonIndex.value++;
+        String category = currentCategory;
+        var sessionLevel = currentSessionLevel[category];
+        var totalSessions = totalSession[category];
+        // saveSession(category, sessionLevel! + 1); // Move to next session
+        print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
+        print('category = $category session level = $sessionLevel total session = $totalSessions');
+        if(totalSessions! > sessionLevel!){
+          await saveSession(category, sessionLevel + 1);
+          startSession(category);
+        }
+
+      // }
+    }
+    else if (currentLessonIndex.value != null && currentLessonIndex.value < lessonLength - 1) {
+
       currentLessonIndex.value++;
+      print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
     }
   }
 
@@ -82,6 +172,7 @@ class SessionController extends GetxController {
   void goToPreviousLesson() {
     if (currentLessonIndex.value > 0) {
       currentLessonIndex.value--;
+      print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
     }
   }
 }
