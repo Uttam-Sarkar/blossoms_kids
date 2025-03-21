@@ -5,7 +5,7 @@ import '../controllers/session_controller.dart';
 class SessionView extends StatelessWidget {
   final SessionController controller = Get.find();
   final String category = Get.arguments['category'];
-  final int sessionLevel = Get.arguments['sessionLevel'];
+  // final int sessionLevel = Get.arguments['sessionLevel'];
   final currentSession = Get.arguments['currentSession'];
   SessionView({super.key});
   @override
@@ -13,9 +13,10 @@ class SessionView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white, // Background color similar to border
       body: Obx( () {
-
+        int sessionLevel = controller.currentSessionLevel[category] as int;
         int currentLessonIndex = controller.currentLessonIndex.value;
         var lesson = currentSession.value!.lessons[currentLessonIndex];
+
 
         return SafeArea(
           child: Column(
@@ -87,12 +88,7 @@ class SessionView extends StatelessWidget {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: controller.goToNextLesson,
-                              // onPressed: () {
-                              //   // Handle next action
-                              //
-                              // },
                               style: ElevatedButton.styleFrom(
-
                                 backgroundColor: Colors.green,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),

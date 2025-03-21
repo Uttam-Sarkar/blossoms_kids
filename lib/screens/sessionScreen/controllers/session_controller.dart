@@ -114,8 +114,8 @@ class SessionController extends GetxController {
       // Convert JSON to Session object and update state
       currentSession.value = Session.fromJson(jsonData);
       lessonLength = currentSession.value!.lessons.length;
-
-      Get.toNamed(RoutesName.sessionPage, arguments: {'category': category, 'sessionLevel': sessionLevel, 'currentSession' : currentSession});
+      // 'sessionLevel': currentSessionLevel[category], //for next line
+      Get.toNamed(RoutesName.sessionPage, arguments: {'category': category, 'currentSession' : currentSession});
     } catch (e) {
       if (kDebugMode) {
         print("Error loading session: $e");
@@ -142,37 +142,46 @@ class SessionController extends GetxController {
   // }
 
 
-
+  var showCompletionScreen = false.obs;
   Future<void> goToNextLesson() async {
     if(currentLessonIndex.value == lessonLength - 1){
-      // go to next session
-      // if (currentSessionLevel.value != null && currentLessonIndex.value < lessonLength - 1) {
-      //   currentLessonIndex.value++;
-        String category = currentCategory;
-        var sessionLevel = currentSessionLevel[category];
-        var totalSessions = totalSession[category];
-        // saveSession(category, sessionLevel! + 1); // Move to next session
-        print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
-        print('category = $category session level = $sessionLevel total session = $totalSessions');
-        if(totalSessions! > sessionLevel!){
-          await saveSession(category, sessionLevel + 1);
-          startSession(category);
-        }
 
-      // }
+        if(showCompletionScreen == false){
+          showCompletionScreen.value = true;
+          Get.toNamed(RoutesName.sessionCompletion);
+
+        }else{
+          showCompletionScreen.value = false;
+          String category = currentCategory;
+          var sessionLevel = currentSessionLevel[category];
+          var totalSessions = totalSession[category];
+
+          if(totalSessions! > sessionLevel!){
+            await saveSession(category, sessionLevel + 1);
+            startSession(category);
+          }
+          else{
+            currentSessionLevel[category] = 1;
+            startSession(category);
+          }
+        }
+        // startSession(category);
+
+        print('session change lesson index = $currentLessonIndex lessonLength = $lessonLength');
+        // print('category = $category session level = $sessionLevel total session = $totalSessions');
+
     }
     else if (currentLessonIndex.value != null && currentLessonIndex.value < lessonLength - 1) {
-
       currentLessonIndex.value++;
       print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
     }
   }
 
   // Move to previous lesson in the session
-  void goToPreviousLesson() {
-    if (currentLessonIndex.value > 0) {
-      currentLessonIndex.value--;
-      print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
-    }
-  }
+  // void goToPreviousLesson() {
+  //   if (currentLessonIndex.value > 0) {
+  //     currentLessonIndex.value--;
+  //     print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
+  //   }
+  // }
 }

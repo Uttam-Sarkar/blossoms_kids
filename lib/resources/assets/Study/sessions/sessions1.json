@@ -2,7 +2,7 @@
   "sessionName": "Session 1",
   "lessons": [
     {
-      "lessonName": "Football",
+      "lessonName": "Uttam",
       "imageAsset": "lib/resources/assets/Study/images/football.jpg",
       "animationAsset": "lib/resources/assets/Study/animations/football.lottie",
       "audioAsset": "lib/resources/assets/Study/audio/football.mp3"

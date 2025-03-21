@@ -23,6 +23,7 @@ class RoutesName {
   static const String socialAndCommunicationSkill = '/social_&_communication_skill';
 
   static const String sessionPage = '/session_page';
+  static const String sessionCompletion = '/session_completion';
 
 
 }
