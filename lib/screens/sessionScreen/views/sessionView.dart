@@ -1,5 +1,7 @@
+import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import '../controllers/session_controller.dart';
 
 class SessionView extends StatelessWidget {
@@ -58,9 +60,17 @@ class SessionView extends StatelessWidget {
                       // 1️⃣ First Column (Biggest) - Image/Animation
                       Expanded(
                           flex: 16, // Takes most of the space
-                          child: Center(
-                            child: Image.asset(lesson!.imageAsset),
-                          )
+                          child: DotLottieLoader.fromAsset(lesson.animationAsset,
+                              frameBuilder: (ctx, dotlottie) {
+                                if (dotlottie != null) {
+                                  return Lottie.memory(dotlottie.animations.values.single);
+                                } else {
+                                  return Container();
+                                }
+                              }),
+                          // child: Center(
+                          //   child: Image.asset(lesson!.imageAsset),
+                          // )
                       ),
 
                       // 2️⃣ Second Column - Text
