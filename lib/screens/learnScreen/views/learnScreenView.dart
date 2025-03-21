@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:blossoms_kids/resources/routes/routes_name.dart';
 
 import '../../../resources/colors/app_color.dart';
-import '../../learn_item_screen/study/views/study_screen.dart';
 import '../widgets/learn_card.dart';
 
 class LearnScreenView extends StatelessWidget {

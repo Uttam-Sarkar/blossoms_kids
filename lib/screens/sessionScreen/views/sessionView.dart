@@ -2,6 +2,7 @@ import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import '../../../resources/routes/routes_name.dart';
 import '../controllers/session_controller.dart';
 
 class SessionView extends StatelessWidget {
@@ -32,7 +33,8 @@ class SessionView extends StatelessWidget {
                     IconButton(
                       icon: Icon(Icons.arrow_back, size: 30),
                       onPressed: () {
-                        Navigator.pop(context);
+                        // Navigator.pop(context);
+                        Get.offAllNamed(RoutesName.learnScreen);
                       },
                     ),
                     SizedBox(width: 8), // Space between the icon and text
