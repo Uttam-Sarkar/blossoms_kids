@@ -16,8 +16,9 @@ class SessionController extends GetxController {
   var currentLessonIndex = 0.obs;
   var currentCategory = 'Study';
   int lessonLength = 0;
+
   // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String userId = "user_id"; // Replace with actual user ID from FirebaseAuth
+  // final String userId = "user_id"; // Replace with actual user ID from FirebaseAuth
 
   @override
   void onInit() {
@@ -41,7 +42,7 @@ class SessionController extends GetxController {
   /// Load session progress from SharedPreferences
   Future<void> loadAllSessionLevel() async {
     final prefs = await SharedPreferences.getInstance();
-    List<String> categories = ["Study", "Social Skills", "Emotion"]; // Add all categories
+    List<String> categories = ["Study"]; // Add all categories
 
     for (var category in categories) {
       int sessionLevel = prefs.getInt('session_$category') ?? 1;// Default sessionLevel is 1
@@ -104,8 +105,7 @@ class SessionController extends GetxController {
     currentLessonIndex.value = 0;
     currentCategory = category;
     int sessionLevel = currentSessionLevel[category] ?? 1;
-    print('sessionLevel = $sessionLevel');
-    print('currentCategory = $currentCategory');
+
     try {
       // Load JSON file
       String jsonString = await rootBundle.loadString("lib/resources/assets/$category/sessions/sessions$sessionLevel.json");

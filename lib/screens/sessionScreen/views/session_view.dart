@@ -4,78 +4,167 @@ import '../controllers/session_controller.dart';
 
 class SessionView extends StatelessWidget {
   final SessionController controller = Get.find();
-  // final SessionController controller = Get.find();
-
   final String category = Get.arguments['category'];
   final int sessionLevel = Get.arguments['sessionLevel'];
   final currentSession = Get.arguments['currentSession'];
-
   SessionView({super.key});
-  // var lesson = currentSession.value!.lessons[1];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Learning Session')),
-      body: Obx(() {
+      backgroundColor: Colors.white, // Background color similar to border
+      body: Obx( () {
+
         int currentLessonIndex = controller.currentLessonIndex.value;
-        // controller.currentLessonIndex.value = 0;
         var lesson = currentSession.value!.lessons[currentLessonIndex];
-        var any = currentSession.value!.lessons.length;
-        print('any = $any');
 
-        // var sessionLevel = controller.currentSessionLevel.value;
-        print("object");
-        print(sessionLevel);
-        print(currentSession.value!.lessons.length);
-        print(lesson.lessonName);
-        // if (sessionLevel == null) {
-        //   return Center(child: CircularProgressIndicator());
-        // }
-
-        // var currentLesson = sessionLevel.lessons[controller.currentLessonIndex.value];
-        // var currentLesson = sessionLevel.
-
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Display the image
-            Image.asset(lesson!.imageAsset),
-
-            // Display the animation (using lottie package)
-            // You can use a package like "lottie" to show animations
-            // Lottie.asset(currentLesson.animationAsset),  // Uncomment and use Lottie package
-
-            // Play the audio (use the audio player package to play audio)
-            ElevatedButton(
-              onPressed: () {
-                // Play the audio (use an audio player like "audioplayers")
-                // AudioPlayer().play(currentLesson.audioAsset);  // Uncomment and use audio player package
-              },
-              child: Text('Play Sound'),
-            ),
-
-            SizedBox(height: 20),
-
-            // Display Next/Previous buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: controller.goToPreviousLesson,
-                  child: Text('Previous'),
+        return SafeArea(
+          child: Column(
+            children: [
+              // Back button and Session Level
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_back, size: 30),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    SizedBox(width: 8), // Space between the icon and text
+                    Text(
+                      'Session: $sessionLevel',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 20),
-                ElevatedButton(
-                  onPressed: controller.goToNextLesson,
-                  child: Text('Next'),
+              ),
+
+              // Main Content divided into 3 sections
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                  ),
+                  child: Column(
+                    children: [
+                      // 1️⃣ First Column (Biggest) - Image/Animation
+                      Expanded(
+                          flex: 16, // Takes most of the space
+                          child: Center(
+                            child: Image.asset(lesson!.imageAsset),
+                          )
+                      ),
+
+                      // 2️⃣ Second Column - Text
+                      Expanded(
+                        flex: 5 ,// Small section
+                        child: Center(
+                          child: Text(
+                            lesson.lessonName,
+                            style: TextStyle(
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
+
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      // 3️⃣ Third Column - Next Button
+                      Expanded(
+                        flex: 3, // Small section for button
+                        // child: Container(color: Colors.red,),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 40,right: 40,top: 16,bottom: 16),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: controller.goToNextLesson,
+                              // onPressed: () {
+                              //   // Handle next action
+                              //
+                              // },
+                              style: ElevatedButton.styleFrom(
+
+                                backgroundColor: Colors.green,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: Text(
+                                'Next',
+                                style: TextStyle(fontSize: 30, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         );
+
       }),
     );
+
+
+
+    // return Scaffold(
+    //   appBar: AppBar(title: Text('Learning Session')),
+    //   body: Obx(() {
+    //     int currentLessonIndex = controller.currentLessonIndex.value;
+    //     var lesson = currentSession.value!.lessons[currentLessonIndex];
+    //
+    //     return Column(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       crossAxisAlignment: CrossAxisAlignment.center,
+    //       children: [
+    //         // Display the image
+    //         Image.asset(lesson!.imageAsset),
+    //
+    //         // Display the animation (using lottie package)
+    //         // You can use a package like "lottie" to show animations
+    //         // Lottie.asset(currentLesson.animationAsset),  // Uncomment and use Lottie package
+    //
+    //         // Play the audio (use the audio player package to play audio)
+    //         ElevatedButton(
+    //           onPressed: () {
+    //             // Play the audio (use an audio player like "audioplayers")
+    //             // AudioPlayer().play(currentLesson.audioAsset);  // Uncomment and use audio player package
+    //           },
+    //           child: Text('Play Sound'),
+    //         ),
+    //
+    //         SizedBox(height: 20),
+    //
+    //         // Display Next/Previous buttons
+    //         Row(
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: [
+    //             ElevatedButton(
+    //               onPressed: controller.goToPreviousLesson,
+    //               child: Text('Previous'),
+    //             ),
+    //             SizedBox(width: 20),
+    //             ElevatedButton(
+    //               onPressed: controller.goToNextLesson,
+    //               child: Text('Next'),
+    //             ),
+    //           ],
+    //         ),
+    //       ],
+    //     );
+    //   }),
+    // );
   }
 }
