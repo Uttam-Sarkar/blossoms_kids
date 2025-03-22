@@ -1,5 +1,4 @@
 import 'package:blossoms_kids/screens/sessionScreen/views/sessionCompletionView.dart';
-import 'package:blossoms_kids/screens/sessionScreen/views/session_page.dart';
 import 'package:blossoms_kids/screens/sessionScreen/views/sessionView.dart';
 import 'package:get/get.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/login_screen.dart';
