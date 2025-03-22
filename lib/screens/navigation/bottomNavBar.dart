@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:blossoms_kids/resources/colors/app_color.dart';
-import 'package:blossoms_kids/screens/base/view_model/base_view_model.dart';
+import 'package:blossoms_kids/screens/base/controllers/baseController.dart';
 
 class BottomNavBar extends StatelessWidget {
-  final BaseViewModel controller;
+  final BaseController controller;
 
   const BottomNavBar({super.key, required this.controller});
 

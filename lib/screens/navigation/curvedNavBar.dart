@@ -2,11 +2,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:blossoms_kids/resources/colors/app_color.dart';
-import 'package:blossoms_kids/screens/base/view_model/base_view_model.dart';
+import 'package:blossoms_kids/screens/base/controllers/baseController.dart';
 
 class CurvedNavBar extends StatelessWidget {
 
-  final BaseViewModel controller;
+  final BaseController controller;
 
 
   const CurvedNavBar({super.key, required this.controller});

@@ -1,7 +1,7 @@
-import 'package:blossoms_kids/screens/sessionScreen/controllers/session_controller.dart';
+import 'package:blossoms_kids/screens/sessionScreen/controllers/sessionController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:blossoms_kids/resources/routes/routes_name.dart';
+import 'package:blossoms_kids/resources/routes/routesName.dart';
 
 import '../../../resources/colors/app_color.dart';
 import '../widgets/learn_card.dart';

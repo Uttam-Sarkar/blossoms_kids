@@ -1,12 +1,14 @@
+import 'package:blossoms_kids/screens/base/controllers/baseController.dart';
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../../../resources/routes/routes_name.dart';
-import '../controllers/session_controller.dart';
+import '../../../resources/routes/routesName.dart';
+import '../controllers/sessionController.dart';
 
 class SessionView extends StatelessWidget {
   final SessionController controller = Get.find();
+  final BaseController baseController = Get.find();
   final String category = Get.arguments['category'];
   // final int sessionLevel = Get.arguments['sessionLevel'];
   final currentSession = Get.arguments['currentSession'];
@@ -34,7 +36,9 @@ class SessionView extends StatelessWidget {
                       icon: Icon(Icons.arrow_back, size: 30),
                       onPressed: () {
                         // Navigator.pop(context);
-                        Get.offAllNamed(RoutesName.learnScreen);
+                        // Get.offNamed(baseController.selectedIndex.value = 1;);
+                        baseController.selectedIndex.value = 1;
+                        Get.offNamed(RoutesName.baseView);// go to learn page
                       },
                     ),
                     SizedBox(width: 8), // Space between the icon and text
@@ -130,7 +134,7 @@ class SessionView extends StatelessWidget {
     // return Scaffold(
     //   appBar: AppBar(title: Text('Learning Session')),
     //   body: Obx(() {
-    //     int currentLessonIndex = controller.currentLessonIndex.value;
+    //     int currentLessonIndex = controllers.currentLessonIndex.value;
     //     var lesson = currentSession.value!.lessons[currentLessonIndex];
     //
     //     return Column(
@@ -160,12 +164,12 @@ class SessionView extends StatelessWidget {
     //           mainAxisAlignment: MainAxisAlignment.center,
     //           children: [
     //             ElevatedButton(
-    //               onPressed: controller.goToPreviousLesson,
+    //               onPressed: controllers.goToPreviousLesson,
     //               child: Text('Previous'),
     //             ),
     //             SizedBox(width: 20),
     //             ElevatedButton(
-    //               onPressed: controller.goToNextLesson,
+    //               onPressed: controllers.goToNextLesson,
     //               child: Text('Next'),
     //             ),
     //           ],

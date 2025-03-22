@@ -1,4 +1,4 @@
-import 'package:blossoms_kids/screens/base/views/base_view.dart';
+import 'package:blossoms_kids/screens/base/views/baseView.dart';
 import 'package:blossoms_kids/screens/learnScreen/views/learnScreenView.dart';
 import 'package:blossoms_kids/screens/sessionScreen/views/sessionCompletionView.dart';
 import 'package:blossoms_kids/screens/sessionScreen/views/session_page.dart';

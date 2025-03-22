@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/session_controller.dart';
-import '../view_model/session_model.dart';
+import '../controllers/sessionController.dart';
+import '../view_model/sessionModel.dart';
 
 class SessionPage extends StatelessWidget {
   final SessionController controller = Get.find();
-  // final SessionController controller = Get.put(SessionController());
+  // final SessionController controllers = Get.put(SessionController());
   final String category = Get.arguments['category'];
   final int sessionLevel = Get.arguments['sessionLevel'];
   final currentSession = Get.arguments['currentSession'];

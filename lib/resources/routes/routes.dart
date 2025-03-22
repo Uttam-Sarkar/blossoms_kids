@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/login_screen.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/signup_screen.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/splash_screen.dart';
-import 'package:blossoms_kids/resources/routes/routes_name.dart';
+import 'package:blossoms_kids/resources/routes/routesName.dart';
 import 'package:blossoms_kids/screens/learnScreen/views/learnScreenView.dart';
 import 'package:blossoms_kids/screens/learn_item_screen/balloon_blast/views/balloon_blast_screen.dart';
 import 'package:blossoms_kids/screens/learn_item_screen/emotion/views/emotion_screen.dart';
@@ -20,7 +20,7 @@ import 'package:blossoms_kids/screens/learn_item_screen/study/views/study_screen
 import 'package:blossoms_kids/screens/parentScreen/views/parentScreenView.dart';
 import 'package:blossoms_kids/screens/practiceScreen/views/practiceScreenView.dart';
 
-import '../../screens/base/views/base_view.dart';
+import '../../screens/base/views/baseView.dart';
 
 class AppRoutes {
 
