@@ -1,3 +1,4 @@
+import 'package:blossoms_kids/screens/testScreen/views/testScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:firebase_core/firebase_core.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       ),
 
       getPages: AppRoutes.appRoutes(),
-      // home: SessionCompletionView(),
+      // home: TestScreen(),
     );
   }
 }

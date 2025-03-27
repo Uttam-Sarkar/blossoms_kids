@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../testScreen/controllers/testController.dart';
-import '../controllers/sessionController.dart';
 
-class SessionCompletionView extends StatelessWidget {
-  final SessionController controller = Get.find();
+class TestCompletionView extends StatelessWidget {
   // final TestController controller = Get.find();
+  final TestController controller = Get.find();
 
   // const SessionCompletionView({super.key});
 
@@ -20,7 +19,7 @@ class SessionCompletionView extends StatelessWidget {
       body:  Column(
         children: [
           Expanded(
-            flex: 21,
+              flex: 21,
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -43,26 +42,26 @@ class SessionCompletionView extends StatelessWidget {
                 ),
               )),
           Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 40,right: 40,top: 16,bottom: 16),
-            child: SizedBox(
-                width: double.infinity,
-              child: ElevatedButton(
-                onPressed: controller.goToNextLesson,////
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+              flex: 3,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 40,right: 40,top: 16,bottom: 16),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: controller.goToNextLesson,////
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                      'Next Test',
+                      style: TextStyle(fontSize: 30, color: Colors.white),
+                    ),
                   ),
                 ),
-                child: Text(
-                  'Next Session',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
-                ),
-              ),
-            ),
-            )
+              )
           )
         ],
       ),

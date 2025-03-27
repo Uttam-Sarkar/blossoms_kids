@@ -1,5 +1,6 @@
 import 'package:blossoms_kids/screens/sessionScreen/views/sessionCompletionView.dart';
 import 'package:blossoms_kids/screens/sessionScreen/views/sessionView.dart';
+import 'package:blossoms_kids/screens/testScreen/views/testView.dart';
 import 'package:get/get.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/login_screen.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/signup_screen.dart';
@@ -20,6 +21,9 @@ import 'package:blossoms_kids/screens/parentScreen/views/parentScreenView.dart';
 import 'package:blossoms_kids/screens/practiceScreen/views/practiceScreenView.dart';
 
 import '../../screens/base/views/baseView.dart';
+import '../../screens/testScreen/views/testCompletionView.dart';
+import '../../screens/testScreen/views/testScreen.dart';
+import '../../screens/testScreen/views/testScreenView.dart';
 
 class AppRoutes {
 
@@ -124,7 +128,7 @@ class AppRoutes {
     ),
 
     GetPage(
-      name: RoutesName.sessionPage,
+      name: RoutesName.sessionView,
       page: () => SessionView(),
     ),
 
@@ -132,5 +136,17 @@ class AppRoutes {
       name: RoutesName.sessionCompletion,
       page: () => SessionCompletionView(),
     ),
+
+    GetPage(
+      name: RoutesName.testView,
+      page: () => TestView(),
+    ),
+
+    GetPage(
+      name: RoutesName.testCompletion,
+      page: () => TestCompletionView(),
+    ),
+
+
   ];
 }

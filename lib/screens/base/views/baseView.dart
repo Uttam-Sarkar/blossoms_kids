@@ -16,7 +16,7 @@ class BaseView extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<Widget> pages = [
-    const PracticeScreenView(),
+    PracticeScreenView(),
     LearnScreenView(),
     const ParentScreenView(),
   ];

@@ -22,8 +22,9 @@ class RoutesName {
   static const String psychologicalEducation = '/psychological_education';
   static const String socialAndCommunicationSkill = '/social_&_communication_skill';
 
-  static const String sessionPage = '/session_page';
+  static const String sessionView = '/session_view';
   static const String sessionCompletion = '/session_completion';
-
+  static const String testView = '/test_view';
+  static const String testCompletion = '/test_completion';
 
 }

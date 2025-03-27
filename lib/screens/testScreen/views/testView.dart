@@ -1,28 +1,30 @@
-import 'package:blossoms_kids/screens/base/controllers/baseController.dart';
+import 'package:blossoms_kids/screens/sessionScreen/views/sessionView.dart';
+import 'package:blossoms_kids/screens/testScreen/controllers/testController.dart';
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+
 import '../../../resources/routes/routesName.dart';
-import '../controllers/sessionController.dart';
+import '../../base/controllers/baseController.dart';
 
-class SessionView extends StatelessWidget {
-  SessionView({super.key});
 
-  final SessionController controller = Get.find();
+class TestView extends StatelessWidget {
+  TestView({super.key});
+  final TestController controller = Get.find();
   final BaseController baseController = Get.find();
+
   final String category = Get.arguments['category'];
   // final int sessionLevel = Get.arguments['sessionLevel'];
-  final currentSession = Get.arguments['currentSession'];
+  final testCurrentSession = Get.arguments['testCurrentSession'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Background color similar to border
       body: Obx( () {
-        int sessionLevel = controller.currentSessionLevel[category] as int;
-        int currentLessonIndex = controller.currentLessonIndex.value;
-        var lesson = currentSession.value!.lessons[currentLessonIndex];
+        int sessionLevel = controller.testCurrentSessionLevel[category] as int;
+        int testCurrentLessonIndex = controller.testCurrentLessonIndex.value;
+        var lesson = testCurrentSession.value!.lessons[testCurrentLessonIndex];
 
 
         return SafeArea(
@@ -39,7 +41,7 @@ class SessionView extends StatelessWidget {
                       onPressed: () {
                         // Navigator.pop(context);
                         // Get.offNamed(baseController.selectedIndex.value = 1;);
-                        baseController.selectedIndex.value = 1;
+                        baseController.selectedIndex.value = 0;
                         Get.offNamed(RoutesName.baseView);// go to learn page
                       },
                     ),
@@ -67,18 +69,18 @@ class SessionView extends StatelessWidget {
                     children: [
                       // 1️⃣ First Column (Biggest) - Image/Animation
                       Expanded(
-                          flex: 16, // Takes most of the space
-                          child: DotLottieLoader.fromAsset(lesson.animationAsset,
-                              frameBuilder: (ctx, dotlottie) {
-                                if (dotlottie != null) {
-                                  return Lottie.memory(dotlottie.animations.values.single);
-                                } else {
-                                  return Container();
-                                }
-                              }),
-                          // child: Center(
-                          //   child: Image.asset(lesson!.imageAsset),
-                          // )
+                        flex: 16, // Takes most of the space
+                        child: DotLottieLoader.fromAsset(lesson.animationAsset,
+                            frameBuilder: (ctx, dotlottie) {
+                              if (dotlottie != null) {
+                                return Lottie.memory(dotlottie.animations.values.single);
+                              } else {
+                                return Container();
+                              }
+                            }),
+                        // child: Center(
+                        //   child: Image.asset(lesson!.imageAsset),
+                        // )
                       ),
 
                       // 2️⃣ Second Column - Text
