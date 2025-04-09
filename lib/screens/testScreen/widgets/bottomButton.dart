@@ -9,9 +9,24 @@ class BottomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => ElevatedButton(
-      onPressed:  controller.goToNextLesson,
-      child: Text(controller.showLesson.value ? "Next" : "Check"),
-    ));
+    return Padding(
+      padding: const EdgeInsets.only(left: 40,right: 40,top: 16,bottom: 16),
+      child: SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: controller.goToNextLesson,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          child: Text(
+            controller.showLesson.value? 'Next':'Check',
+            style: TextStyle(fontSize: 30, color: Colors.white),
+          ),
+        ),
+      ),
+    );
   }
 }

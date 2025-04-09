@@ -14,15 +14,18 @@ class TestLearningView extends StatelessWidget {
   final TestController controller = Get.find();
   final BaseController baseController = Get.find();
 
-  final String category = Get.arguments['category'];
+  // final String category = Get.arguments['category'];
   // final int sessionLevel = Get.arguments['sessionLevel'];
-  final testCurrentSession = Get.arguments['testCurrentSession'];
+  // final testCurrentSession = Get.arguments['testCurrentSession'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx( () {
+        final String category = controller.testCurrentCategory;
+        final testCurrentSession = controller.testCurrentSession;
         int sessionLevel = controller.testCurrentSessionLevel[category] as int;
+
         int testCurrentLessonIndex = controller.testCurrentLessonIndex.value;
         var lesson = testCurrentSession.value!.lessons[testCurrentLessonIndex];
 
@@ -99,29 +102,29 @@ class TestLearningView extends StatelessWidget {
                       ),
 
                       // 3️⃣ Third Column - Next Button
-                      Expanded(
-                        flex: 3, // Small section for button
-                        // child: Container(color: Colors.red,),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 40,right: 40,top: 16,bottom: 16),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: controller.goToNextLesson,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                              child: Text(
-                                'Next',
-                                style: TextStyle(fontSize: 30, color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Expanded(
+                      //   flex: 3, // Small section for button
+                      //   // child: Container(color: Colors.red,),
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.only(left: 40,right: 40,top: 16,bottom: 16),
+                      //     child: SizedBox(
+                      //       width: double.infinity,
+                      //       child: ElevatedButton(
+                      //         onPressed: controller.goToNextLesson,
+                      //         style: ElevatedButton.styleFrom(
+                      //           backgroundColor: Colors.green,
+                      //           shape: RoundedRectangleBorder(
+                      //             borderRadius: BorderRadius.circular(12),
+                      //           ),
+                      //         ),
+                      //         child: Text(
+                      //           'Next',
+                      //           style: TextStyle(fontSize: 30, color: Colors.white),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
