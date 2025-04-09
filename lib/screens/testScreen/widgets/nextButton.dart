@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../controllers/testController.dart';
 
-class BottomButton extends StatelessWidget {
+class NextButton extends StatelessWidget {
   final TestController controller = Get.find();
 
   @override
@@ -13,18 +13,17 @@ class BottomButton extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: controller.goToNextLesson,
+          onPressed: controller.nextButtonActivity,
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.green,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          child:Obx(()=> Text(
-            controller.showLesson.value? 'Next':'Check',
+          child: Text('Next',
             style: TextStyle(fontSize: 30, color: Colors.white),
           ),
-          )
+
         ),
       ),
     );

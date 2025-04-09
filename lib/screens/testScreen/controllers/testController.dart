@@ -67,11 +67,18 @@ class TestController extends SessionController {
           "lib/resources/assets/$category/sessions/sessions$testSessionLevel.json");
       Map<String, dynamic> jsonData = jsonDecode(jsonString);
 
+
+
       // Convert JSON to Session object and update state
       testCurrentSession.value = Session.fromJson(jsonData);
       lessonLength = testCurrentSession.value!.lessons.length;
       // 'sessionLevel': currentSessionLevel[category], //for next line
       // Get.toNamed(RoutesName.testScreen, arguments: {'category': category, 'testCurrentSession' : testCurrentSession});
+
+      if (!settingsShowLesson.value) {
+        showLesson.value = false;
+        generateOptions(); // So UI gets data before building
+      }
       Get.toNamed(RoutesName.testScreen);
     } catch (e) {
       if (kDebugMode) {
@@ -80,9 +87,9 @@ class TestController extends SessionController {
     }
   }
 
-  @override
-  Future<void> goToNextLesson() async {
+  Future<void> checkButtonActivity() async {
     if (testCurrentLessonIndex.value == lessonLength - 1) {
+
       if (showTestCompletionScreen == false) {
         showTestCompletionScreen.value = true;
         Get.toNamed(RoutesName.testCompletion);
@@ -102,18 +109,15 @@ class TestController extends SessionController {
       }
 
       print('session change lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
-    } else if (testCurrentLessonIndex.value != null &&
-        testCurrentLessonIndex.value < lessonLength - 1) {
+    } else if (testCurrentLessonIndex.value != null && testCurrentLessonIndex.value < lessonLength - 1) {
+
       if(settingsShowLesson.value){
-        showLesson.value ? showLesson.value = false : showLesson.value = true;
+        showLesson.value = true;
       }else{
         showLesson.value = false;
-      }
-      if(showLesson.value == false){
         generateOptions();
-        testCurrentLessonIndex.value++;
       }
-
+      testCurrentLessonIndex.value++;
       if (kDebugMode) {
         print(
             'show value = $showLesson lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
@@ -121,10 +125,18 @@ class TestController extends SessionController {
     }
   }
 
+  void nextButtonActivity(){
+    showLesson.value = false;
+    generateOptions();
+  }
+
+
+
   int correctIndex = 0;
-  List<int> options = <int>[].obs;
+  RxList<int> options = <int>[].obs;
 
   void generateOptions() {
+    selectedIndex.value = -1;
     Random random = Random();
     int correctOptionIndex = testCurrentLessonIndex.value;
     correctIndex = correctOptionIndex;
@@ -134,12 +146,12 @@ class TestController extends SessionController {
     while (selectedOptionsIndex.length < 4) {
       selectedOptionsIndex.add(random.nextInt(lessonLength));
     }
-    options = selectedOptionsIndex.toList();
+    options.value = selectedOptionsIndex.toList();
     options.shuffle(); // Shuffle for random order
   }
 
   void checkAnswer() {
-    if (selectedIndex == correctIndex) {
+    if (selectedIndex.value == correctIndex) {
       Get.snackbar("Correct!", "You selected the right image!",
           backgroundColor: const Color(0xFF4CAF50));
     } else {

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../../testScreen/controllers/testController.dart';
 
 class TestCompletionView extends StatelessWidget {
-  // final TestController controller = Get.find();
   final TestController controller = Get.find();
 
   // const SessionCompletionView({super.key});
@@ -12,7 +11,7 @@ class TestCompletionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Session Completed'),
+        title: Text('Test Completed'),
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
@@ -33,7 +32,7 @@ class TestCompletionView extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'You have successfully completed the session.',
+                      'You have successfully completed the Test.',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                     ),
@@ -48,7 +47,7 @@ class TestCompletionView extends StatelessWidget {
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: controller.goToNextLesson,////
+                    onPressed: controller.checkButtonActivity,////
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       shape: RoundedRectangleBorder(
