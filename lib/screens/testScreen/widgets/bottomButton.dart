@@ -21,10 +21,11 @@ class BottomButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          child: Text(
+          child:Obx(()=> Text(
             controller.showLesson.value? 'Next':'Check',
             style: TextStyle(fontSize: 30, color: Colors.white),
           ),
+          )
         ),
       ),
     );
