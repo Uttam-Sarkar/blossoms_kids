@@ -18,6 +18,7 @@ class TestController extends SessionController {
   var showLesson = true.obs;
   var selectedIndex = (-1).obs;
   var isCorrect = false.obs;
+  var showTestCompletionScreen = false.obs;
 
   @override
   void onInit() {
@@ -72,7 +73,7 @@ class TestController extends SessionController {
     }
   }
 
-  var showTestCompletionScreen = false.obs;
+
   @override
   Future<void> goToNextLesson() async {
     if(testCurrentLessonIndex.value == lessonLength - 1){

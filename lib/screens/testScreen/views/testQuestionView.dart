@@ -3,16 +3,17 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/testController.dart';
 import '../controllers/testController2.dart';
 
-class TestScreenView extends StatelessWidget {
-  final TestController2 controller = Get.find();
+class TestQuestionView extends StatelessWidget {
+  final TestController controller = Get.find();
   Random random = Random();
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var lesson = controller.testLessons[controller.currentLesson.value];
+      var lesson = controller.testLessons[controller.testCurrentLessonIndex.value];
       int randomNum = random.nextInt(2);
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -20,13 +21,16 @@ class TestScreenView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
               GestureDetector(
-                onTap: () => controller.checkAnswer(randomNum == 1 ? 0 : 1 ),
+                onTap: () => controller.checkAnswer(randomNum == 1 ? 0 : 1),
                 child: Container(
                   color: Colors.blueAccent,
                   padding: EdgeInsets.all(20),
-                  child: randomNum == 1 ? Image.asset("assets/${lesson.correctAnimation}", height: 100) : Image.asset("assets/${lesson.correctAnimation}", height: 100),
+                  child: randomNum == 1
+                      ? Image.asset("assets/${lesson.correctAnimation}",
+                          height: 100)
+                      : Image.asset("assets/${lesson.correctAnimation}",
+                          height: 100),
                 ),
               ),
               GestureDetector(
@@ -34,7 +38,11 @@ class TestScreenView extends StatelessWidget {
                 child: Container(
                   color: Colors.blueAccent,
                   padding: EdgeInsets.all(20),
-                  child: randomNum == 1 ? Image.asset("assets/${lesson.falseAnimation}", height: 100) : Image.asset("assets/${lesson.correctAnimation}", height: 100),
+                  child: randomNum == 1
+                      ? Image.asset("assets/${lesson.falseAnimation}",
+                          height: 100)
+                      : Image.asset("assets/${lesson.correctAnimation}",
+                          height: 100),
                 ),
               )
             ],

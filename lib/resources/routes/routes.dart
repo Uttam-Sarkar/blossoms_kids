@@ -1,6 +1,6 @@
 import 'package:blossoms_kids/screens/sessionScreen/views/sessionCompletionView.dart';
 import 'package:blossoms_kids/screens/sessionScreen/views/sessionView.dart';
-import 'package:blossoms_kids/screens/testScreen/views/testView.dart';
+import 'package:blossoms_kids/screens/testScreen/views/testLearningView.dart';
 import 'package:get/get.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/login_screen.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/signup_screen.dart';
@@ -23,7 +23,7 @@ import 'package:blossoms_kids/screens/practiceScreen/views/practiceScreenView.da
 import '../../screens/base/views/baseView.dart';
 import '../../screens/testScreen/views/testCompletionView.dart';
 import '../../screens/testScreen/views/testScreen.dart';
-import '../../screens/testScreen/views/testScreenView.dart';
+import '../../screens/testScreen/views/testQuestionView.dart';
 
 class AppRoutes {
 
@@ -139,7 +139,7 @@ class AppRoutes {
 
     GetPage(
       name: RoutesName.testView,
-      page: () => TestView(),
+      page: () => TestLearningView(),
     ),
 
     GetPage(

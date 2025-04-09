@@ -9,8 +9,8 @@ import '../../../resources/routes/routesName.dart';
 import '../../base/controllers/baseController.dart';
 
 
-class TestView extends StatelessWidget {
-  TestView({super.key});
+class TestLearningView extends StatelessWidget {
+  TestLearningView({super.key});
   final TestController controller = Get.find();
   final BaseController baseController = Get.find();
 
