@@ -1,4 +1,3 @@
-import 'package:blossoms_kids/screens/sessionScreen/views/sessionView.dart';
 import 'package:blossoms_kids/screens/testScreen/controllers/testController.dart';
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';

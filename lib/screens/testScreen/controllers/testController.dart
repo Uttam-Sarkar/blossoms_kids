@@ -138,7 +138,7 @@ class TestController extends SessionController {
     options.shuffle(); // Shuffle for random order
   }
 
-  void checkAnswer(int selectedIndex) {
+  void checkAnswer() {
     if (selectedIndex == correctIndex) {
       Get.snackbar("Correct!", "You selected the right image!",
           backgroundColor: const Color(0xFF4CAF50));
