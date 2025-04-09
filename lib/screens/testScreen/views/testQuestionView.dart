@@ -16,7 +16,19 @@ class TestQuestionView extends StatelessWidget {
           children: [
             // Options grid (4 options)
             Expanded(
-              flex: 16,
+              flex: 5,
+                child: DotLottieLoader.fromAsset("lib/resources/assets/Others/animations/confused.lottie",
+                    frameBuilder: (ctx, dotlottie) {
+                      if (dotlottie != null) {
+                        return Lottie.memory(dotlottie.animations.values.single);
+                      } else {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                    }
+                ),
+            ),
+            Expanded(
+              flex: 12,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GridView.builder(
@@ -63,7 +75,7 @@ class TestQuestionView extends StatelessWidget {
 
             // Check button
             Expanded(
-              flex: 5 ,// Small section
+              flex: 3 ,// Small section
               child: Center(
                 child: Text(
                   lesson.lessons[controller.correctIndex].lessonName,
