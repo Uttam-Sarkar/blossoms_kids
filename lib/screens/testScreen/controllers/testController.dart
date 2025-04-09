@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:blossoms_kids/screens/sessionScreen/controllers/sessionController.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,7 @@ class TestController extends SessionController {
   var testCurrentSessionLevel = <String, int>{}.obs;
   var testCurrentLessonIndex = 0.obs;
   var testCurrentCategory = '';
+  var testCurrentSession = Rxn<Session>(); // Holds the current session data
 
   var showLesson = true.obs;
   var selectedIndex = (-1).obs;
@@ -45,11 +47,6 @@ class TestController extends SessionController {
     testCurrentSessionLevel[category] = testSessionNumber;
   }
 
-
-
-
-  var testCurrentSession = Rxn<Session>(); // Holds the current session data
-
   /// Load a session from assets
   Future<void> testStartSession(String category) async {
     testCurrentLessonIndex.value = 0;
@@ -65,7 +62,9 @@ class TestController extends SessionController {
       testCurrentSession.value = Session.fromJson(jsonData);
       lessonLength = testCurrentSession.value!.lessons.length;
       // 'sessionLevel': currentSessionLevel[category], //for next line
-      Get.toNamed(RoutesName.testView, arguments: {'category': category, 'testCurrentSession' : testCurrentSession});
+      // Get.toNamed(RoutesName.testScreen, arguments: {'category': category, 'testCurrentSession' : testCurrentSession});
+      Get.toNamed(RoutesName.testScreen);
+
     } catch (e) {
       if (kDebugMode) {
         print("Error loading session: $e");
@@ -109,11 +108,34 @@ class TestController extends SessionController {
     }
   }
 
+  int correctIndex = 0;
+  List<int> options = <int>[].obs;
 
+  void generateOptions(){
+    Random random = Random();
+    int correctOptionIndex = testCurrentLessonIndex.value;
+    correctIndex = correctOptionIndex ;
 
-  void checkAnswer(int index) {
-    selectedIndex.value = index;
-    isCorrect.value = (index == 0); // Assuming index 0 is correct
+    Set<int> selectedOptionsIndex = {correctOptionIndex};
+
+    while (selectedOptionsIndex.length < 4){
+      selectedOptionsIndex.add(random.nextInt(lessonLength));
+    }
+    // options = selectedOptionsIndex.toList();
+    // options.shuffle(); // Shuffle for random order
+
+  }
+
+  void checkAnswer(int selectedIndex) {
+    if(selectedIndex == correctIndex){
+      Get.snackbar("Correct!", "You selected the right image!", backgroundColor: const Color(0xFF4CAF50));
+    }else {
+      Get.snackbar("Wrong!", "Try again!", backgroundColor: const Color(0xFFF44336));
+    }
+    // generateOptions(); // Load new images
+
+    // selectedIndex.value = index;
+    // isCorrect.value = (index == 0); // Assuming index 0 is correct
   }
 
 }

@@ -138,8 +138,18 @@ class AppRoutes {
     ),
 
     GetPage(
-      name: RoutesName.testView,
+      name: RoutesName.testLearningView,
       page: () => TestLearningView(),
+    ),
+
+    GetPage(
+      name: RoutesName.testQuestionView,
+      page: () => TestQuestionView(),
+    ),
+
+    GetPage(
+      name: RoutesName.testScreen,
+      page: () => TestScreen(),
     ),
 
     GetPage(

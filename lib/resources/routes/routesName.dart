@@ -24,7 +24,10 @@ class RoutesName {
 
   static const String sessionView = '/session_view';
   static const String sessionCompletion = '/session_completion';
-  static const String testView = '/test_view';
+  static const String testLearningView = '/test_learning_view';
   static const String testCompletion = '/test_completion';
+  static const String testQuestionView = '/test_question_view';
+  static const String testScreen = '/test_screen';
+
 
 }

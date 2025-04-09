@@ -1,55 +1,64 @@
 import 'dart:math';
 
+import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:lottie/lottie.dart';
 import '../controllers/testController.dart';
-import '../controllers/testController2.dart';
+// import '../controllers/testController2.dart';
 
 class TestQuestionView extends StatelessWidget {
-  final TestController controller = Get.find();
-  Random random = Random();
+final TestController controller = Get.find();
+// final TestController controller =  Get.put(TestController(), permanent: true);
 
-  @override
-  Widget build(BuildContext context) {
-    return Obx(() {
-      var lesson = controller.testLessons[controller.testCurrentLessonIndex.value];
-      int randomNum = random.nextInt(2);
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () => controller.checkAnswer(randomNum == 1 ? 0 : 1),
-                child: Container(
-                  color: Colors.blueAccent,
-                  padding: EdgeInsets.all(20),
-                  child: randomNum == 1
-                      ? Image.asset("assets/${lesson.correctAnimation}",
-                          height: 100)
-                      : Image.asset("assets/${lesson.correctAnimation}",
-                          height: 100),
-                ),
-              ),
-              GestureDetector(
-                onTap: () => controller.checkAnswer(randomNum == 1 ? 1 : 0),
-                child: Container(
-                  color: Colors.blueAccent,
-                  padding: EdgeInsets.all(20),
-                  child: randomNum == 1
-                      ? Image.asset("assets/${lesson.falseAnimation}",
-                          height: 100)
-                      : Image.asset("assets/${lesson.correctAnimation}",
-                          height: 100),
-                ),
-              )
-            ],
-          ),
-          Text(lesson.text, style: TextStyle(fontSize: 24))
-        ],
-      );
-    });
-  }
+// Random random = Random();
+// late final String category ;
+// final late testCurrentSession;
+// TestQuestionView(this.category, this.testCurrentSession);
+
+@override
+Widget build(BuildContext context) {
+return Scaffold(
+body: Obx(()
+{
+var lesson = controller.testCurrentSession.value!;
+
+return Padding(
+padding: const EdgeInsets.all(12.0),
+child: GridView.builder(
+gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+crossAxisCount: 2, // Two images in each row
+mainAxisSpacing: 10,
+crossAxisSpacing: 10,
+),
+itemCount: 4,
+itemBuilder: (context, index) {
+// ImageModel image = controller.options[index];
+int selectedIndex = controller.options[index];
+
+return GestureDetector(
+onTap: () => controller.checkAnswer(selectedIndex),
+child: Container(
+padding: const EdgeInsets.all(10),
+decoration: BoxDecoration(
+border: Border.all(color: Colors.black),
+borderRadius: BorderRadius.circular(10),
+),
+
+child: DotLottieLoader.fromAsset(lesson.lessons[selectedIndex].animationAsset,
+frameBuilder: (ctx, dotlottie) {
+if (dotlottie != null) {
+return Lottie.memory(dotlottie.animations.values.single);
+} else {
+return Container();
+}
+}),              ),
+);
+},
+),
+);
+}
+),
+);
+}
 }

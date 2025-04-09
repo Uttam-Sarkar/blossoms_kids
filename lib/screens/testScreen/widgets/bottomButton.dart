@@ -10,7 +10,7 @@ class BottomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => ElevatedButton(
-      onPressed: controller.showLesson.value ? () => controller.showLesson.value = false : controller.goToNextLesson,
+      onPressed:  controller.goToNextLesson,
       child: Text(controller.showLesson.value ? "Next" : "Check"),
     ));
   }
