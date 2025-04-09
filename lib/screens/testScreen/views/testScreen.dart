@@ -17,7 +17,7 @@ class TestScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Expanded(flex: 21, child: Obx(() => controller.showLesson.value ? TestLearningView() : TestQuestionView())),
+          Expanded(flex: 21, child: Obx(() => (controller.showLesson.value && controller.settingsShowLesson.value) ? TestLearningView() : TestQuestionView())),
           Expanded(flex: 3, child: BottomButton())
         ],
       ),

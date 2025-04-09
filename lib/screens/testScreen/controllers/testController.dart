@@ -16,7 +16,7 @@ class TestController extends SessionController {
   var testCurrentCategory = '';
   var testCurrentSession = Rxn<Session>(); // Holds the current session data
 
-  var settingsShowLesson = false.obs;
+  var settingsShowLesson = true.obs;
   var showLesson = true.obs;
 
   var selectedIndex = (-1).obs;
@@ -101,16 +101,22 @@ class TestController extends SessionController {
         }
       }
 
-      print(
-          'session change lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
+      print('session change lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
     } else if (testCurrentLessonIndex.value != null &&
         testCurrentLessonIndex.value < lessonLength - 1) {
-      testCurrentLessonIndex.value++;
+      if(settingsShowLesson.value){
+        showLesson.value ? showLesson.value = false : showLesson.value = true;
+      }else{
+        showLesson.value = false;
+      }
+      if(showLesson.value == false){
+        generateOptions();
+        testCurrentLessonIndex.value++;
+      }
 
-      showLesson.value ? showLesson.value = false : showLesson.value = true;
       if (kDebugMode) {
         print(
-            'lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
+            'show value = $showLesson lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
       }
     }
   }
@@ -128,8 +134,8 @@ class TestController extends SessionController {
     while (selectedOptionsIndex.length < 4) {
       selectedOptionsIndex.add(random.nextInt(lessonLength));
     }
-    // options = selectedOptionsIndex.toList();
-    // options.shuffle(); // Shuffle for random order
+    options = selectedOptionsIndex.toList();
+    options.shuffle(); // Shuffle for random order
   }
 
   void checkAnswer(int selectedIndex) {

@@ -25,15 +25,16 @@ class TestQuestionView extends StatelessWidget {
         return Column(
           children: [
             // Optionally, if showLesson is true, show the learning lesson content here
-            if (controller.showLesson.value)
-              Expanded(
-                  flex: 4,
-                  child: Center(
-                      child: Image.asset("assets/learning_placeholder.png"))),
+            // if (controller.showLesson.value)
+            //   Expanded(
+            //       flex: 4,
+            //       child: Center(
+            //           child: Image.asset("assets/learning_placeholder.png"))
+            //   ),
 
             // Options grid (4 options)
             Expanded(
-              flex: 10,
+              flex: 16,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GridView.builder(
@@ -51,7 +52,7 @@ class TestQuestionView extends StatelessWidget {
                       onTap: () {
                         controller.selectedIndex.value = optionIndex;
                       },
-                      child: Obx(() => Container(
+                      child: Container(
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color:
@@ -59,12 +60,16 @@ class TestQuestionView extends StatelessWidget {
                                   width: 3),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Image.asset(
-                              "assets/\${lessonList[optionIndex].animationAsset}",
-                              fit: BoxFit.contain,
-                            ),
+                        child: DotLottieLoader.fromAsset(lesson.lessons[optionIndex].animationAsset,
+                            frameBuilder: (ctx, dotlottie) {
+                              if (dotlottie != null) {
+                                return Lottie.memory(dotlottie.animations.values.single);
+                              } else {
+                                return Container();
+                              }
+                            }),
                           )
-                      ),
+
                     );
                   },
                 ),
@@ -73,16 +78,18 @@ class TestQuestionView extends StatelessWidget {
 
             // Check button
             Expanded(
-              flex: 3,
+              flex: 5 ,// Small section
               child: Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    controller.checkAnswer(controller.selectedIndex.value);
-                  },
-                  child: Text("Check"),
+                child: Text(
+                  lesson.lessons[controller.correctIndex].lessonName,
+                  style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+
+                  ),
                 ),
               ),
-            )
+            ),
           ],
         );
 
