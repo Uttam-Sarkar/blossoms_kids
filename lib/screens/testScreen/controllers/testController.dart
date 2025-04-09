@@ -16,12 +16,14 @@ class TestController extends SessionController {
   var testCurrentCategory = '';
   var testCurrentSession = Rxn<Session>(); // Holds the current session data
 
-  var settingsShowLesson = true.obs;
+  var settingsShowLesson = false.obs;
   var showLesson = true.obs;
 
   var selectedIndex = (-1).obs;
-  var isCorrect = false.obs;
   var showTestCompletionScreen = false.obs;
+
+  var isAnswerCorrect = false.obs;
+  var showFeedbackAnimation = false.obs;
 
   @override
   void onInit() {
@@ -89,7 +91,6 @@ class TestController extends SessionController {
 
   Future<void> checkButtonActivity() async {
     if (testCurrentLessonIndex.value == lessonLength - 1) {
-
       if (showTestCompletionScreen == false) {
         showTestCompletionScreen.value = true;
         Get.toNamed(RoutesName.testCompletion);
@@ -111,13 +112,33 @@ class TestController extends SessionController {
       print('session change lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
     } else if (testCurrentLessonIndex.value != null && testCurrentLessonIndex.value < lessonLength - 1) {
 
-      if(settingsShowLesson.value){
-        showLesson.value = true;
-      }else{
-        showLesson.value = false;
-        generateOptions();
+      if(selectedIndex.value < 0){
+
+        Get.snackbar("👆 👆 👆","Select Correct Option",
+            backgroundColor: const Color(0xFFF44336));
       }
-      testCurrentLessonIndex.value++;
+      else{
+        showFeedbackAnimation.value = true;
+        isAnswerCorrect.value = (selectedIndex.value == correctIndex);
+Future.delayed(const Duration(seconds: 2),(){
+  showFeedbackAnimation.value = false;
+
+  Future.delayed(const Duration(milliseconds: 500), (){
+    testCurrentLessonIndex.value++;
+    selectedIndex.value = -1;
+
+    if(settingsShowLesson.value){
+      showLesson.value = true;
+    }else{
+      showLesson.value = false;
+      generateOptions();
+    }
+  });
+
+});
+
+      }
+
       if (kDebugMode) {
         print(
             'show value = $showLesson lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
@@ -148,19 +169,5 @@ class TestController extends SessionController {
     }
     options.value = selectedOptionsIndex.toList();
     options.shuffle(); // Shuffle for random order
-  }
-
-  void checkAnswer() {
-    if (selectedIndex.value == correctIndex) {
-      Get.snackbar("Correct!", "You selected the right image!",
-          backgroundColor: const Color(0xFF4CAF50));
-    } else {
-      Get.snackbar("Wrong!", "Try again!",
-          backgroundColor: const Color(0xFFF44336));
-    }
-    // generateOptions(); // Load new images
-
-    // selectedIndex.value = index;
-    // isCorrect.value = (index == 0); // Assuming index 0 is correct
   }
 }
