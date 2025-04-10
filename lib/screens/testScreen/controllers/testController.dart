@@ -5,12 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../resources/routes/routesName.dart';
 import '../../sessionScreen/view_model/sessionModel.dart';
 
 class TestController extends SessionController {
-  /// For test Screen
   var testCurrentSessionLevel = <String, int>{}.obs;
   var testCurrentLessonIndex = 0.obs;
   var testCurrentCategory = '';
@@ -24,6 +22,9 @@ class TestController extends SessionController {
 
   var isAnswerCorrect = false.obs;
   var showFeedbackAnimation = false.obs;
+
+  int correctIndex = 0;
+  RxList<int> options = <int>[].obs;
 
   @override
   void onInit() {
@@ -88,24 +89,26 @@ class TestController extends SessionController {
   Future<void> checkButtonActivity() async {
     if (testCurrentLessonIndex.value == lessonLength - 1) {
       if (showTestCompletionScreen == false) {
-        showTestCompletionScreen.value = true;
-        showLesson.value = true;//for next lesson showing
-
-        showFeedbackAnimation.value = true;
-        isAnswerCorrect.value = (selectedIndex.value == correctIndex);
-        Future.delayed(const Duration(seconds: 2),(){
-          showFeedbackAnimation.value = false;
-        });
-
-        Future.delayed(const Duration(seconds: 2), (){
-          Get.toNamed(RoutesName.testCompletion);
-        });
-
+        if (selectedIndex.value < 0) {
+          Get.snackbar("👆 👆 👆", "Select Correct Option",
+              backgroundColor: const Color(0xFFF44336));
+        } else {
+          showFeedbackAnimation.value = true;
+          isAnswerCorrect.value = (selectedIndex.value == correctIndex);
+          Future.delayed(const Duration(seconds: 2), () {
+            showFeedbackAnimation.value = false;
+            showTestCompletionScreen.value = true;
+            Future.delayed(const Duration(milliseconds: 500), () {
+              Get.toNamed(RoutesName.testCompletion);
+            });
+          });
+        }
       } else {
         showTestCompletionScreen.value = false;
         String category = testCurrentCategory;
         var testSessionLevel = testCurrentSessionLevel[category];
         var totalSessions = totalSession[category];
+        showLesson.value = true; //for next lesson showing
 
         if (totalSessions! > testSessionLevel!) {
           await testSaveSession(category, testSessionLevel + 1);
@@ -115,37 +118,34 @@ class TestController extends SessionController {
           testStartSession(category);
         }
       }
-
-      print('session change lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
-    } else if (testCurrentLessonIndex.value != null && testCurrentLessonIndex.value < lessonLength - 1) {
-
-      if(selectedIndex.value < 0){
-
-        Get.snackbar("👆 👆 👆","Select Correct Option",
-            backgroundColor: const Color(0xFFF44336));
+      if (kDebugMode) {
+        print(
+            'session change lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
       }
-      else{
+    } else if (testCurrentLessonIndex.value != null &&
+        testCurrentLessonIndex.value < lessonLength - 1) {
+      if (selectedIndex.value < 0) {
+        Get.snackbar("👆 👆 👆", "Select Correct Option",
+            backgroundColor: const Color(0xFFF44336));
+      } else {
         showFeedbackAnimation.value = true;
         isAnswerCorrect.value = (selectedIndex.value == correctIndex);
-Future.delayed(const Duration(seconds: 2),(){
-  showFeedbackAnimation.value = false;
+        Future.delayed(const Duration(seconds: 2), () {
+          showFeedbackAnimation.value = false;
 
-  Future.delayed(const Duration(milliseconds: 500), (){
-    testCurrentLessonIndex.value++;
-    selectedIndex.value = -1;
+          Future.delayed(const Duration(milliseconds: 500), () {
+            testCurrentLessonIndex.value++;
+            selectedIndex.value = -1;
 
-    if(settingsShowLesson.value){
-      showLesson.value = true;
-    }else{
-      showLesson.value = false;
-      generateOptions();
-    }
-  });
-
-});
-
+            if (settingsShowLesson.value) {
+              showLesson.value = true;
+            } else {
+              showLesson.value = false;
+              generateOptions();
+            }
+          });
+        });
       }
-
       if (kDebugMode) {
         print(
             'show value = $showLesson lesson index = $testCurrentLessonIndex lessonLength = $lessonLength');
@@ -153,15 +153,10 @@ Future.delayed(const Duration(seconds: 2),(){
     }
   }
 
-  void nextButtonActivity(){
+  void nextButtonActivity() {
     showLesson.value = false;
     generateOptions();
   }
-
-
-
-  int correctIndex = 0;
-  RxList<int> options = <int>[].obs;
 
   void generateOptions() {
     selectedIndex.value = -1;
