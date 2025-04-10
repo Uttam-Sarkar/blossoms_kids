@@ -26,6 +26,8 @@ class TestController extends SessionController {
   int correctIndex = 0;
   RxList<int> options = <int>[].obs;
 
+  var isCheckButtonDisabled = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -87,9 +89,13 @@ class TestController extends SessionController {
   }
 
   Future<void> checkButtonActivity() async {
+    if (isCheckButtonDisabled.value) return; // Block when animation is showing
+    isCheckButtonDisabled.value = true; // Disable button during processing
+
     if (testCurrentLessonIndex.value == lessonLength - 1) {
       if (showTestCompletionScreen == false) {
         if (selectedIndex.value < 0) {
+          isCheckButtonDisabled.value = false;
           Get.snackbar("👆 👆 👆", "Select Correct Option",
               backgroundColor: const Color(0xFFF44336));
         } else {
@@ -99,6 +105,7 @@ class TestController extends SessionController {
             showFeedbackAnimation.value = false;
             showTestCompletionScreen.value = true;
             Future.delayed(const Duration(milliseconds: 500), () {
+              isCheckButtonDisabled.value = false; // Enable button again
               Get.toNamed(RoutesName.testCompletion);
             });
           });
@@ -125,6 +132,7 @@ class TestController extends SessionController {
     } else if (testCurrentLessonIndex.value != null &&
         testCurrentLessonIndex.value < lessonLength - 1) {
       if (selectedIndex.value < 0) {
+        isCheckButtonDisabled.value = false;
         Get.snackbar("👆 👆 👆", "Select Correct Option",
             backgroundColor: const Color(0xFFF44336));
       } else {
@@ -136,6 +144,7 @@ class TestController extends SessionController {
           Future.delayed(const Duration(milliseconds: 500), () {
             testCurrentLessonIndex.value++;
             selectedIndex.value = -1;
+            isCheckButtonDisabled.value = false;// Enable button again
 
             if (settingsShowLesson.value) {
               showLesson.value = true;
