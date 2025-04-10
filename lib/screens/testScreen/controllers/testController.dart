@@ -16,7 +16,7 @@ class TestController extends SessionController {
   var testCurrentCategory = '';
   var testCurrentSession = Rxn<Session>(); // Holds the current session data
 
-  var settingsShowLesson = false.obs;
+  var settingsShowLesson = true.obs;
   var showLesson = true.obs;
 
   var selectedIndex = (-1).obs;
@@ -62,20 +62,16 @@ class TestController extends SessionController {
     testCurrentLessonIndex.value = 0;
     testCurrentCategory = category;
     int testSessionLevel = testCurrentSessionLevel[category] ?? 1;
-
+    selectedIndex.value = -1;
     try {
       // Load JSON file
       String jsonString = await rootBundle.loadString(
           "lib/resources/assets/$category/sessions/sessions$testSessionLevel.json");
       Map<String, dynamic> jsonData = jsonDecode(jsonString);
 
-
-
       // Convert JSON to Session object and update state
       testCurrentSession.value = Session.fromJson(jsonData);
       lessonLength = testCurrentSession.value!.lessons.length;
-      // 'sessionLevel': currentSessionLevel[category], //for next line
-      // Get.toNamed(RoutesName.testScreen, arguments: {'category': category, 'testCurrentSession' : testCurrentSession});
 
       if (!settingsShowLesson.value) {
         showLesson.value = false;
@@ -93,7 +89,18 @@ class TestController extends SessionController {
     if (testCurrentLessonIndex.value == lessonLength - 1) {
       if (showTestCompletionScreen == false) {
         showTestCompletionScreen.value = true;
-        Get.toNamed(RoutesName.testCompletion);
+        showLesson.value = true;//for next lesson showing
+
+        showFeedbackAnimation.value = true;
+        isAnswerCorrect.value = (selectedIndex.value == correctIndex);
+        Future.delayed(const Duration(seconds: 2),(){
+          showFeedbackAnimation.value = false;
+        });
+
+        Future.delayed(const Duration(seconds: 2), (){
+          Get.toNamed(RoutesName.testCompletion);
+        });
+
       } else {
         showTestCompletionScreen.value = false;
         String category = testCurrentCategory;

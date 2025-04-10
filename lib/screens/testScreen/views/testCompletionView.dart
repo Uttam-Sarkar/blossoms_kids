@@ -47,7 +47,7 @@ class TestCompletionView extends StatelessWidget {
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: controller.checkButtonActivity,////
+                    onPressed: controller.checkButtonActivity,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       shape: RoundedRectangleBorder(

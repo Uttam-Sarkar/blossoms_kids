@@ -2,23 +2,51 @@ import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import '../../../resources/routes/routesName.dart';
+import '../../base/controllers/baseController.dart';
 import '../controllers/testController.dart';
 
 class TestQuestionView extends StatelessWidget {
   final TestController controller = Get.find();
+  final BaseController baseController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
         var lesson = controller.testCurrentSession.value!;
         final selected = controller.selectedIndex.value;
+        var testCurrentSessionLevel = controller.testCurrentSessionLevel[controller.testCurrentCategory];
         return Stack(
           children: [
             Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_back, size: 30),
+                        onPressed: () {
+                          baseController.selectedIndex.value = 0;
+                          Get.offNamed(RoutesName.baseView);// go to learn page
+                        },
+                      ),
+                      Text(
+                        'Session: $testCurrentSessionLevel',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
                 // Options grid (4 options)
                 Expanded(
-                  flex: 5,
+                  flex: 3,
                     child: DotLottieLoader.fromAsset("lib/resources/assets/Others/animations/confused.lottie",
                         frameBuilder: (ctx, dotlottie) {
                           if (dotlottie != null) {
@@ -32,12 +60,12 @@ class TestQuestionView extends StatelessWidget {
                 Expanded(
                   flex: 12,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(left: 5, right: 5),
                     child: GridView.builder(
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 5,
+                        crossAxisSpacing: 5,
                       ),
                       itemCount: controller.options.length,
                       itemBuilder: (context, index) {
@@ -51,7 +79,7 @@ class TestQuestionView extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border.all(
                                     color:
-                                    isSelected ? Colors.blue : Colors.black,
+                                    isSelected ? Colors.pinkAccent : Colors.black,
                                     width: 3),
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -94,7 +122,7 @@ class TestQuestionView extends StatelessWidget {
                   color: Colors.black.withOpacity(0.4),
                   child: Center(
                     child: Container(
-                      width: 1700,
+                      // width: 1700,
                       // height: 200,
                      child:  DotLottieLoader.fromAsset(
                          controller.isAnswerCorrect.value
