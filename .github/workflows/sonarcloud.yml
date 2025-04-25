@@ -1,14 +1,8 @@
 on:
-  pull_request:
-    branches:
-      - main
-      - master
   push:
-    branches:
-      - main
-      - master
-      - develop
-      - creating_screen
+    branches: [ "screens/creating_screen" ]
+  pull_request:
+    branches: [ "screens/creating_screen" ]
 name: "Build & Release"
 jobs:
   build:
