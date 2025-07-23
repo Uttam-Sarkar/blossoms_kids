@@ -1,7 +1,5 @@
-import 'package:blossoms_kids/screens/testScreen/views/testScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:blossoms_kids/resources/colors/app_color.dart';
 import 'package:blossoms_kids/resources/getx_localization/languages.dart';
 import 'package:blossoms_kids/resources/routes/routes.dart';

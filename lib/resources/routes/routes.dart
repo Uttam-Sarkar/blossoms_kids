@@ -1,29 +1,32 @@
-import 'package:blossoms_kids/screens/sessionScreen/views/sessionCompletionView.dart';
-import 'package:blossoms_kids/screens/sessionScreen/views/sessionView.dart';
-import 'package:blossoms_kids/screens/testScreen/views/testLearningView.dart';
+import 'package:blossoms_kids/features/sessionScreen/views/session_completion_view.dart';
+
 import 'package:get/get.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/login_screen.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/signup_screen.dart';
 // import 'package:blossoms_kids/features/authentication/views/auth/splash_screen.dart';
 import 'package:blossoms_kids/resources/routes/routesName.dart';
-import 'package:blossoms_kids/screens/learnScreen/views/learnScreenView.dart';
-import 'package:blossoms_kids/screens/learn_item_screen/balloon_blast/views/balloon_blast_screen.dart';
-import 'package:blossoms_kids/screens/learn_item_screen/emotion/views/emotion_screen.dart';
-import 'package:blossoms_kids/screens/learn_item_screen/family/views/family_screen.dart';
-import 'package:blossoms_kids/screens/learn_item_screen/living_skill/views/living_skill_screen.dart';
-import 'package:blossoms_kids/screens/learn_item_screen/music/views/music_screen.dart';
-import 'package:blossoms_kids/screens/learn_item_screen/profession/views/profession_screen.dart';
-import 'package:blossoms_kids/screens/learn_item_screen/psychological/views/psychological_screen.dart';
-import 'package:blossoms_kids/screens/learn_item_screen/shape_matching/views/shape_matching_screen.dart';
-import 'package:blossoms_kids/screens/learn_item_screen/social_skill/views/social_skill_screen.dart';
-import 'package:blossoms_kids/screens/learn_item_screen/study/views/study_screen.dart';
-import 'package:blossoms_kids/screens/parentScreen/views/parentScreenView.dart';
-import 'package:blossoms_kids/screens/practiceScreen/views/practiceScreenView.dart';
 
-import '../../screens/base/views/baseView.dart';
-import '../../screens/testScreen/views/testCompletionView.dart';
-import '../../screens/testScreen/views/testScreen.dart';
-import '../../screens/testScreen/views/testQuestionView.dart';
+
+import '../../features/base/views/base_view.dart';
+import '../../features/learnScreen/views/learn_screen_view.dart';
+import '../../features/learn_item_screen/balloon_blast/views/balloon_blast_screen.dart';
+import '../../features/learn_item_screen/emotion/views/emotion_screen.dart';
+import '../../features/learn_item_screen/family/views/family_screen.dart';
+import '../../features/learn_item_screen/living_skill/views/living_skill_screen.dart';
+import '../../features/learn_item_screen/music/views/music_screen.dart';
+import '../../features/learn_item_screen/profession/views/profession_screen.dart';
+import '../../features/learn_item_screen/psychological/views/psychological_screen.dart';
+import '../../features/learn_item_screen/shape_matching/views/shape_matching_screen.dart';
+import '../../features/learn_item_screen/social_skill/views/social_skill_screen.dart';
+import '../../features/learn_item_screen/study/views/study_screen.dart';
+import '../../features/parentScreen/views/parent_screen_view.dart';
+import '../../features/practiceScreen/views/practice_screen_view.dart';
+import '../../features/sessionScreen/views/session_view.dart';
+import '../../features/testScreen/views/test_completion_view.dart';
+import '../../features/testScreen/views/test_learning_view.dart';
+import '../../features/testScreen/views/test_question_view.dart';
+import '../../features/testScreen/views/test_screen.dart';
+
 
 class AppRoutes {
 
