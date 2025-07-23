@@ -39,12 +39,10 @@ class LearnCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-                image,
+            Image.asset(image,
                 height: 150,
                 // width: 80,
-                fit: BoxFit.cover
-            ),
+                fit: BoxFit.cover),
             const SizedBox(height: 10),
             Text(
               name,
