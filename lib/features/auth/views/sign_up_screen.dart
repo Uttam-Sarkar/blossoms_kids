@@ -1,11 +1,9 @@
-// lib/features/auth/view/sign_up_screen.dart
 import 'package:blossoms_kids/features/auth/views/sign_in_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../widgets/text_input_field_widen.dart';
+import '../../../core/shared/widgets/text_input_field_widen.dart';
 import '../controllers/auth_controller.dart';
-// import '../model/auth_controller.dart';
 
 class SignUpScreen extends StatelessWidget {
   final AuthController controller = Get.find();

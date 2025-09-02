@@ -1,14 +1,19 @@
+import 'dart:io';
+
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import '../../../core/resources/routes/routesName.dart';
+import '../../assets/controllers/assets_controller.dart';
 import '../../base/controllers/base_controller.dart';
 import '../controllers/test_controller.dart';
 
 class TestQuestionView extends StatelessWidget {
   final TestController controller = Get.find();
   final BaseController baseController = Get.find();
+
+  final assetsPath = Get.find<AssetController>().assetsPath.value;
 
   TestQuestionView({super.key});
 
@@ -49,17 +54,19 @@ class TestQuestionView extends StatelessWidget {
 
                 // Options grid (4 options)
                 Expanded(
-                  flex: 3,
-                  child: DotLottieLoader.fromAsset(
-                      "lib/core/resources/assets/Others/animations/confused.lottie",
+                    flex: 3,
+                    child: DotLottieLoader.fromFile(
+                      File('$assetsPath/assets/Others/animations/confused.lottie'),
                       frameBuilder: (ctx, dotLottie) {
-                    if (dotLottie != null) {
-                      return Lottie.memory(dotLottie.animations.values.single);
-                    } else {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                  }),
-                ),
+                        if (dotLottie != null) {
+                          return Lottie.memory(
+                              dotLottie.animations.values.single);
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                      },
+                    )),
                 Expanded(
                   flex: 12,
                   child: Padding(
@@ -88,8 +95,8 @@ class TestQuestionView extends StatelessWidget {
                                     width: 3),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: DotLottieLoader.fromAsset(
-                                  lesson.lessons[optionIndex].animationAsset,
+                              child: DotLottieLoader.fromFile(
+                                  File(assetsPath + lesson.lessons[optionIndex].animationAsset),
                                   frameBuilder: (ctx, dotlottie) {
                                 if (dotlottie != null) {
                                   return Lottie.memory(
@@ -127,19 +134,20 @@ class TestQuestionView extends StatelessWidget {
                 return Container(
                   color: Colors.black.withOpacity(0.4),
                   child: Center(
-                    child: DotLottieLoader.fromAsset(
-                        controller.isAnswerCorrect.value
-                            ? 'lib/core/resources/assets/Others/animations/tick-mark.lottie'
-                            : 'lib/core/resources/assets/Others/animations/crossmark.lottie',
-                        // "lib/core/resources/assets/Others/animations/confused.lottie",
-                        frameBuilder: (ctx, dotLottie) {
-                      if (dotLottie != null) {
-                        return Lottie.memory(
-                            dotLottie.animations.values.single);
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    }),
+                    child: DotLottieLoader.fromFile(
+                      controller.isAnswerCorrect.value
+                          ? File('$assetsPath/assets/Others/animations/tick-mark.lottie')
+                          : File('$assetsPath/assets/Others/animations/crossmark.lottie'),
+                      frameBuilder: (ctx, dotLottie) {
+                        if (dotLottie != null) {
+                          return Lottie.memory(
+                              dotLottie.animations.values.single);
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                      },
+                    ),
                   ),
                 );
               } else {

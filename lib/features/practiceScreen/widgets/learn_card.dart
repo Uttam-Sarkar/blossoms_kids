@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../../../core/resources/colors/app_color.dart';
 
 class LearnCard extends StatelessWidget {
   final String name;
-  final String image;
+  final File image;
   final Color color;
   final VoidCallback onTap;
 
@@ -39,7 +41,7 @@ class LearnCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(image,
+            Image.file(image,
                 height: 150,
                 // width: 80,
                 fit: BoxFit.cover),

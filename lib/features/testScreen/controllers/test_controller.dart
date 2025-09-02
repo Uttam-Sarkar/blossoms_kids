@@ -1,14 +1,18 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/resources/routes/routesName.dart';
+import '../../assets/controllers/assets_controller.dart';
 import '../../sessionScreen/controllers/session_controller.dart';
 import '../../sessionScreen/model/session_model.dart';
 
 class TestController extends SessionController {
+  final AssetController assetController = Get.find();
+
   var testCurrentSessionLevel = <String, int>{}.obs;
   var testCurrentLessonIndex = 0.obs;
   var testCurrentCategory = '';
@@ -68,10 +72,21 @@ class TestController extends SessionController {
     selectedIndex.value = -1;
     try {
       // Load JSON file
-      String jsonString = await rootBundle.loadString(
-          "lib/core/resources/assets/$category/sessions/sessions$testSessionLevel.json");
-      Map<String, dynamic> jsonData = jsonDecode(jsonString);
+      // String jsonString = await rootBundle.loadString(
+      //     "lib/core/resources/assets/$category/sessions/sessions$testSessionLevel.json");
+      // Map<String, dynamic> jsonData = jsonDecode(jsonString);
+      final assetsPath = assetController.assetsPath.value;
 
+      final filePath =
+          '$assetsPath/assets/$category/sessions/sessions$testSessionLevel.json';
+      final file = File(filePath);
+
+      if (!await file.exists()) {
+        throw Exception("Session JSON not found: $filePath");
+      }
+
+      final jsonString = await file.readAsString();
+      final jsonData = jsonDecode(jsonString);
       // Convert JSON to Session object and update state
       testCurrentSession.value = Session.fromJson(jsonData);
       lessonLength = testCurrentSession.value!.lessons.length;

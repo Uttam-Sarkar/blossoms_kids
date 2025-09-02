@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import '../controllers/test_controller.dart';
 
 class CheckButton extends StatelessWidget {
-  // const CheckButton({super.key});
+  CheckButton({super.key});
+
   final TestController controller = Get.find();
 
   @override

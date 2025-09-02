@@ -26,6 +26,10 @@ dependencies:
   dotlottie_loader: ^0.0.4
   lottie: 3.3.0
 
+  path_provider: ^2.1.5
+  http: ^1.5.0
+  archive: ^3.3.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -39,43 +43,44 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
+#  assets:
 #    - lib/resources/assets/images/
-    - lib/core/resources/assets/Emotion/animations/
-    - lib/core/resources/assets/Emotion/audio/
-    - lib/core/resources/assets/Emotion/images/
-    - lib/core/resources/assets/Emotion/sessions/
-    - lib/core/resources/assets/Family/animations/
-    - lib/core/resources/assets/Family/audio/
-    - lib/core/resources/assets/Family/images/
-    - lib/core/resources/assets/Family/sessions/
-    - lib/core/resources/assets/Living Skill/animations/
-    - lib/core/resources/assets/Living Skill/audio/
-    - lib/core/resources/assets/Living Skill/images/
-    - lib/core/resources/assets/Living Skill/sessions/
-    - lib/core/resources/assets/Music/animations/
-    - lib/core/resources/assets/Music/audio/
-    - lib/core/resources/assets/Music/images/
-    - lib/core/resources/assets/Music/sessions/
-    - lib/core/resources/assets/Profession/animations/
-    - lib/core/resources/assets/Profession/audio/
-    - lib/core/resources/assets/Profession/images/
-    - lib/core/resources/assets/Profession/sessions/
-    - lib/core/resources/assets/Psychological/animations/
-    - lib/core/resources/assets/Psychological/audio/
-    - lib/core/resources/assets/Psychological/images/
-    - lib/core/resources/assets/Psychological/sessions/
-    - lib/core/resources/assets/Social Skill/animations/
-    - lib/core/resources/assets/Social Skill/audio/
-    - lib/core/resources/assets/Social Skill/images/
-    - lib/core/resources/assets/Social Skill/sessions/
-    - lib/core/resources/assets/Study/animations/
-    - lib/core/resources/assets/Study/audio/
-    - lib/core/resources/assets/Study/images/
-    - lib/core/resources/assets/Study/sessions/
-    - lib/core/resources/assets/Others/animations/
-    - lib/core/resources/assets/Others/audio/
-    - lib/core/resources/assets/Others/images/
+#    - lib/core/resources/assets/Emotion/animations/
+#    - lib/core/resources/assets/Emotion/audio/
+#    - lib/core/resources/assets/Emotion/images/
+#    - lib/core/resources/assets/Emotion/sessions/
+#    - lib/core/resources/assets/Family/animations/
+#    - lib/core/resources/assets/Family/audio/
+#    - lib/core/resources/assets/Family/images/
+#    - lib/core/resources/assets/Family/sessions/
+#    - lib/core/resources/assets/Living Skill/animations/
+#    - lib/core/resources/assets/Living Skill/audio/
+#    - lib/core/resources/assets/Living Skill/images/
+#    - lib/core/resources/assets/Living Skill/sessions/
+#    - lib/core/resources/assets/Music/animations/
+#    - lib/core/resources/assets/Music/audio/
+#    - lib/core/resources/assets/Music/images/
+#    - lib/core/resources/assets/Music/sessions/
+#    - lib/core/resources/assets/Profession/animations/
+#    - lib/core/resources/assets/Profession/audio/
+#    - lib/core/resources/assets/Profession/images/
+#    - lib/core/resources/assets/Profession/sessions/
+#    - lib/core/resources/assets/Psychological/animations/
+#    - lib/core/resources/assets/Psychological/audio/
+#    - lib/core/resources/assets/Psychological/images/
+#    - lib/core/resources/assets/Psychological/sessions/
+#    - lib/core/resources/assets/Social Skill/animations/
+#    - lib/core/resources/assets/Social Skill/audio/
+#    - lib/core/resources/assets/Social Skill/images/
+#    - lib/core/resources/assets/Social Skill/sessions/
+#    - lib/core/resources/assets/Study/animations/
+#    - lib/core/resources/assets/Study/audio/
+#    - lib/core/resources/assets/Study/images/
+#    - lib/core/resources/assets/Study/sessions/
+#    - lib/core/resources/assets/Others/animations/
+#    - lib/core/resources/assets/Others/audio/
+#    - lib/core/resources/assets/Others/images/
+
 #    - lib/resources/assets/Others/sessions/
 
 #    - lib/resources/assets/Study/sessions/sessions1.json

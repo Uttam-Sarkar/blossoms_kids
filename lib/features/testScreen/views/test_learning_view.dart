@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:blossoms_kids/features/assets/controllers/assets_controller.dart';
 import 'package:blossoms_kids/features/testScreen/controllers/test_controller.dart';
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
@@ -7,23 +10,24 @@ import 'package:lottie/lottie.dart';
 import '../../../core/resources/routes/routesName.dart';
 import '../../base/controllers/base_controller.dart';
 
-
 class TestLearningView extends StatelessWidget {
   TestLearningView({super.key});
+
   final TestController controller = Get.find();
   final BaseController baseController = Get.find();
+  final AssetController assetController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx( () {
+      body: Obx(() {
+        final assetsPath = assetController.assetsPath.value;
         final String category = controller.testCurrentCategory;
         final testCurrentSession = controller.testCurrentSession;
         int sessionLevel = controller.testCurrentSessionLevel[category] as int;
 
         int testCurrentLessonIndex = controller.testCurrentLessonIndex.value;
         var lesson = testCurrentSession.value!.lessons[testCurrentLessonIndex];
-
 
         return Column(
           children: [
@@ -37,7 +41,7 @@ class TestLearningView extends StatelessWidget {
                     icon: Icon(Icons.arrow_back, size: 30),
                     onPressed: () {
                       baseController.selectedIndex.value = 0;
-                      Get.offNamed(RoutesName.baseView);// go to learn page
+                      Get.offNamed(RoutesName.baseView); // go to learn page
                     },
                   ),
                   SizedBox(width: 8), // Space between the icon and text
@@ -64,22 +68,27 @@ class TestLearningView extends StatelessWidget {
                   children: [
                     // 1️⃣ First Column (Biggest) - Image/Animation
                     Expanded(
-                      flex: 16, // Takes most of the space
-                      child: DotLottieLoader.fromAsset(lesson.animationAsset,
+                      flex: 16,
+                      // Takes most of the space
+                      // child: DotLottieLoader.fromFile(file, frameBuilder: frameBuilder),
+
+                      child: DotLottieLoader.fromFile(
+                          File(assetsPath + lesson.animationAsset),
                           frameBuilder: (ctx, dotlottie) {
-                            if (dotlottie != null) {
-                              return Lottie.memory(dotlottie.animations.values.single);
-                            } else {
-                              return Container();
-                            }
-                          }),
+                        if (dotlottie != null) {
+                          return Lottie.memory(
+                              dotlottie.animations.values.single);
+                        } else {
+                          return Container();
+                        }
+                      }),
                       // child: Center(
                       //   child: Image.asset(lesson!.imageAsset),
                       // )
                     ),
                     // 2️⃣ Second Column - Text
                     Expanded(
-                      flex: 5 ,// Small section
+                      flex: 5, // Small section
                       child: Center(
                         child: Text(
                           lesson.lessonName,

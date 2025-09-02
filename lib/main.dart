@@ -6,12 +6,17 @@ import 'package:get/get.dart';
 import 'core/resources/colors/app_color.dart';
 import 'core/resources/getx_localization/languages.dart';
 import 'core/resources/routes/routes.dart';
+import 'features/assets/controllers/assets_controller.dart';
 import 'features/auth/controllers/auth_controller.dart';
 import 'features/base/views/base_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(); // Ensure Firebase is initialized before running the app
+
+  final assetController = Get.put(AssetController());
+  await assetController.initAssets();
+
   Get.put(AuthController());
   runApp(MyApp());
 }
@@ -23,6 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final AuthController authController = Get.find();
+    // final AssetController assetController = Get.put(AssetController());
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -41,6 +47,8 @@ class MyApp extends StatelessWidget {
       getPages: AppRoutes.appRoutes(),
       // home: TestScreen(),
       home: Obx(() {
+        // load data
+        // assetController.initAssets();
         if (authController.user.value != null) {
           return BaseView(); // already signed in
         } else {

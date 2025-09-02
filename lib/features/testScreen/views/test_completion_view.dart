@@ -5,6 +5,8 @@ import '../../testScreen/controllers/test_controller.dart';
 class TestCompletionView extends StatelessWidget {
   final TestController controller = Get.find();
 
+  TestCompletionView({super.key});
+
   // const SessionCompletionView({super.key});
 
   @override

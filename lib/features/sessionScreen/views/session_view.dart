@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:blossoms_kids/features/base/controllers/base_controller.dart';
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import '../../../core/resources/routes/routesName.dart';
+import '../../assets/controllers/assets_controller.dart';
 import '../controllers/session_controller.dart';
 
 class SessionView extends StatelessWidget {
@@ -11,7 +14,10 @@ class SessionView extends StatelessWidget {
 
   final SessionController controller = Get.find();
   final BaseController baseController = Get.find();
+  final AssetController assetController = Get.find();
+
   final String category = Get.arguments['category'];
+
   // final int sessionLevel = Get.arguments['sessionLevel'];
   final currentSession = Get.arguments['currentSession'];
 
@@ -19,11 +25,11 @@ class SessionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white, // Background color similar to border
-      body: Obx( () {
+      body: Obx(() {
+        final assetsPath = assetController.assetsPath.value;
         int sessionLevel = controller.currentSessionLevel[category] as int;
         int currentLessonIndex = controller.currentLessonIndex.value;
         var lesson = currentSession.value!.lessons[currentLessonIndex];
-
 
         return SafeArea(
           child: Column(
@@ -40,7 +46,7 @@ class SessionView extends StatelessWidget {
                         // Navigator.pop(context);
                         // Get.offNamed(baseController.selectedIndex.value = 1;);
                         baseController.selectedIndex.value = 1;
-                        Get.offNamed(RoutesName.baseView);// go to learn page
+                        Get.offNamed(RoutesName.baseView); // go to learn page
                       },
                     ),
                     SizedBox(width: 8), // Space between the icon and text
@@ -61,36 +67,38 @@ class SessionView extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(30)),
                   ),
                   child: Column(
                     children: [
                       // 1️⃣   First Column (Biggest) - Image/Animation
                       Expanded(
-                          flex: 16, // Takes most of the space
-                          child: DotLottieLoader.fromAsset(lesson.animationAsset,
-                              frameBuilder: (ctx, dotlottie) {
-                                if (dotlottie != null) {
-                                  return Lottie.memory(dotlottie.animations.values.single);
-                                } else {
-                                  return Container();
-                                }
-                              }),
-                          // child: Center(
-                          //   child: Image.asset(lesson!.imageAsset),
-                          // )
+                        flex: 16, // Takes most of the space
+                        child: DotLottieLoader.fromFile(
+                            File(assetsPath + lesson.animationAsset),
+                            frameBuilder: (ctx, dotlottie) {
+                          if (dotlottie != null) {
+                            return Lottie.memory(
+                                dotlottie.animations.values.single);
+                          } else {
+                            return Container();
+                          }
+                        }),
+                        // child: Center(
+                        //   child: Image.asset(lesson!.imageAsset),
+                        // )
                       ),
 
                       // 2️⃣ Second Column - Text
                       Expanded(
-                        flex: 5 ,// Small section
+                        flex: 5, // Small section
                         child: Center(
                           child: Text(
                             lesson.lessonName,
                             style: TextStyle(
                               fontSize: 50,
                               fontWeight: FontWeight.bold,
-
                             ),
                           ),
                         ),
@@ -101,7 +109,8 @@ class SessionView extends StatelessWidget {
                         flex: 3, // Small section for button
                         // child: Container(color: Colors.red,),
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 40,right: 40,top: 16,bottom: 16),
+                          padding: const EdgeInsets.only(
+                              left: 40, right: 40, top: 16, bottom: 16),
                           child: SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
@@ -114,7 +123,8 @@ class SessionView extends StatelessWidget {
                               ),
                               child: Text(
                                 'Next',
-                                style: TextStyle(fontSize: 30, color: Colors.white),
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.white),
                               ),
                             ),
                           ),
@@ -127,7 +137,6 @@ class SessionView extends StatelessWidget {
             ],
           ),
         );
-
       }),
     );
   }
