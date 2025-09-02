@@ -1,8 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:blossoms_kids/resources/colors/app_color.dart';
 
+import '../../core/resources/colors/app_color.dart';
 import '../base/controllers/base_controller.dart';
 
 class CurvedNavBar extends StatelessWidget {

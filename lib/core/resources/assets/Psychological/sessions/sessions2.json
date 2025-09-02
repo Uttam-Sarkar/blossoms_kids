@@ -1,0 +1,17 @@
+{
+  "sessionName": "Session 2",
+  "lessons": [
+    {
+      "lessonName": "Football",
+      "imageAsset": "lib/core/resources/assets/Study/images/football.jpg",
+      "animationAsset": "lib/core/resources/assets/Study/animations/football.lottie",
+      "audioAsset": "lib/core/resources/assets/Study/audio/football.mp3"
+    },
+    {
+      "lessonName": "Dog",
+      "imageAsset": "lib/core/resources/assets/Study/images/dj.jpg",
+      "animationAsset": "lib/core/resources/assets/Study/animations/dog.lottie",
+      "audioAsset": "lib/core/resources/assets/Study/audio/dog.mp3"
+    }
+  ]
+}

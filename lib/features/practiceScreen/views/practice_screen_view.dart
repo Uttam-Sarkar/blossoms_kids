@@ -1,9 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:blossoms_kids/resources/routes/routesName.dart';
 
-import '../../../resources/colors/app_color.dart';
+import '../../../core/resources/colors/app_color.dart';
+// import '../../../resources/colors/app_color.dart';
+import '../../../core/resources/routes/routesName.dart';
 import '../../testScreen/controllers/test_controller.dart';
 import '../widgets/learn_card.dart';
 
@@ -13,16 +14,16 @@ class PracticeScreenView extends StatelessWidget {
   final TestController controller = Get.put(TestController());
 
   final List<Map<String, dynamic>> learnItems = [
-    {"category": "Shape Matching", "image": "lib/resources/assets/Others/images/shape.jpg", "color": AppColor.cardGreenColor, "route": RoutesName.shapeMatching},
-    {"category": "Balloon Blast", "image": "lib/resources/assets/Others/images/balloonBlast.jpg", "color": AppColor.cardOrangeColor, "route": RoutesName.balloonBlast},
-    {"category": "Living Skill", "image": "lib/resources/assets/Others/images/living.jpg", "color": AppColor.cardRedColor, "route": RoutesName.livingSkill},
-    {"category": "Family", "image": "lib/resources/assets/Others/images/family.jpg", "color": AppColor.cardPurpleColor, "route": RoutesName.family},
-    {"category": "Study", "image": "lib/resources/assets/Others/images/study.jpg", "color": AppColor.cardYellowColor, "route": RoutesName.study},
-    {"category": "Emotion", "image": "lib/resources/assets/Others/images/emotion.jpg", "color": AppColor.cardGreenColor, "route": RoutesName.emotion},
-    {"category": "Profession", "image": "lib/resources/assets/Others/images/profession.jpg", "color": AppColor.cardOrangeColor, "route": RoutesName.profession},
-    {"category": "Music", "image": "lib/resources/assets/Others/images/music.jpg", "color": AppColor.cardRedColor, "route": RoutesName.music},
-    {"category": "Psychological", "image": "lib/resources/assets/Others/images/psychological.jpg", "color": AppColor.cardPurpleColor, "route": RoutesName.psychologicalEducation},
-    {"category": "Social Skill", "image": "lib/resources/assets/Others/images/communication.jpg", "color": AppColor.cardYellowColor, "route": RoutesName.socialAndCommunicationSkill},
+    {"category": "Shape Matching", "image": "lib/core/resources/assets/Others/images/shape.jpg", "color": AppColor.cardGreenColor, "route": RoutesName.shapeMatching},
+    {"category": "Balloon Blast", "image": "lib/core/resources/assets/Others/images/balloonBlast.jpg", "color": AppColor.cardOrangeColor, "route": RoutesName.balloonBlast},
+    {"category": "Living Skill", "image": "lib/core/resources/assets/Others/images/living.jpg", "color": AppColor.cardRedColor, "route": RoutesName.livingSkill},
+    {"category": "Family", "image": "lib/core/resources/assets/Others/images/family.jpg", "color": AppColor.cardPurpleColor, "route": RoutesName.family},
+    {"category": "Study", "image": "lib/core/resources/assets/Others/images/study.jpg", "color": AppColor.cardYellowColor, "route": RoutesName.study},
+    {"category": "Emotion", "image": "lib/core/resources/assets/Others/images/emotion.jpg", "color": AppColor.cardGreenColor, "route": RoutesName.emotion},
+    {"category": "Profession", "image": "lib/core/resources/assets/Others/images/profession.jpg", "color": AppColor.cardOrangeColor, "route": RoutesName.profession},
+    {"category": "Music", "image": "lib/core/resources/assets/Others/images/music.jpg", "color": AppColor.cardRedColor, "route": RoutesName.music},
+    {"category": "Psychological", "image": "lib/core/resources/assets/Others/images/psychological.jpg", "color": AppColor.cardPurpleColor, "route": RoutesName.psychologicalEducation},
+    {"category": "Social Skill", "image": "lib/core/resources/assets/Others/images/communication.jpg", "color": AppColor.cardYellowColor, "route": RoutesName.socialAndCommunicationSkill},
 
   ];
 

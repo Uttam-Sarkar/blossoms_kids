@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:blossoms_kids/resources/colors/app_color.dart';
 import 'package:blossoms_kids/features/base/controllers/base_controller.dart';
+
+import '../../core/resources/colors/app_color.dart';
 
 class BottomNavBar extends StatelessWidget {
   final BaseController controller;

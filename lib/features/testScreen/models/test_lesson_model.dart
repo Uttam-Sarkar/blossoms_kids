@@ -3,5 +3,8 @@ class TestLessonModel {
   final String falseAnimation;
   final String text;
 
-  TestLessonModel({required this.correctAnimation, required this.falseAnimation, required this.text});
+  TestLessonModel(
+      {required this.correctAnimation,
+      required this.falseAnimation,
+      required this.text});
 }

@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../resources/routes/routesName.dart';
+import '../../../core/resources/routes/routesName.dart';
 import '../../sessionScreen/controllers/session_controller.dart';
-import '../../sessionScreen/view_model/session_model.dart';
+import '../../sessionScreen/model/session_model.dart';
 
 class TestController extends SessionController {
   var testCurrentSessionLevel = <String, int>{}.obs;
@@ -69,7 +69,7 @@ class TestController extends SessionController {
     try {
       // Load JSON file
       String jsonString = await rootBundle.loadString(
-          "lib/resources/assets/$category/sessions/sessions$testSessionLevel.json");
+          "lib/core/resources/assets/$category/sessions/sessions$testSessionLevel.json");
       Map<String, dynamic> jsonData = jsonDecode(jsonString);
 
       // Convert JSON to Session object and update state

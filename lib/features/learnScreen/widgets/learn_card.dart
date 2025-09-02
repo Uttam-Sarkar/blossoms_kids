@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../resources/colors/app_color.dart';
+import '../../../core/resources/colors/app_color.dart';
 
 class LearnCard extends StatelessWidget {
   final String name;

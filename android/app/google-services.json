@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "35619403250",
+    "firebase_url": "https://blossom-kids-f69fb-default-rtdb.firebaseio.com",
+    "project_id": "blossom-kids-f69fb",
+    "storage_bucket": "blossom-kids-f69fb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35619403250:android:df8a1dca175a478e42276b",
+        "android_client_info": {
+          "package_name": "com.example.blossom_kids"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35619403250-v3f4hohh0lvjk8s26be0j47bc6vlhf88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHGolW7MccIFn6jL4vt_qwWOIP7rwsdHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35619403250-v3f4hohh0lvjk8s26be0j47bc6vlhf88.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "35619403250-8gtd31qpoonorifgav31d93uvs09suop.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blossomKids"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35619403250:android:a2c526de46357dee42276b",
+        "android_client_info": {
+          "package_name": "com.example.blossoms_kids"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35619403250-v3f4hohh0lvjk8s26be0j47bc6vlhf88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHGolW7MccIFn6jL4vt_qwWOIP7rwsdHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35619403250-v3f4hohh0lvjk8s26be0j47bc6vlhf88.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "35619403250-8gtd31qpoonorifgav31d93uvs09suop.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blossomKids"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

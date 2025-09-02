@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../resources/routes/routesName.dart';
-import '../view_model/session_model.dart';
+import '../../../core/resources/routes/routesName.dart';
+import '../model/session_model.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SessionController extends GetxController {
@@ -30,7 +30,7 @@ class SessionController extends GetxController {
 /// Get total session under a category
   Future<int> getTotalSessions(String category) async {
     try {
-      String jsonString = await rootBundle.loadString("lib/resources/assets/$category/sessions/totalSession.json");
+      String jsonString = await rootBundle.loadString("lib/core/resources/assets/$category/sessions/totalSession.json");
       Map<String, dynamic> jsonData = jsonDecode(jsonString);
 
       return jsonData["total_session"];
@@ -125,7 +125,7 @@ class SessionController extends GetxController {
 
     try {
       // Load JSON file
-      String jsonString = await rootBundle.loadString("lib/resources/assets/$category/sessions/sessions$sessionLevel.json");
+      String jsonString = await rootBundle.loadString("lib/core/resources/assets/$category/sessions/sessions$sessionLevel.json");
       Map<String, dynamic> jsonData = jsonDecode(jsonString);
 
       // Convert JSON to Session object and update state

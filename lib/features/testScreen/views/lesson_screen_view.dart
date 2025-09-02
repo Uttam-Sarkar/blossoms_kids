@@ -9,7 +9,7 @@ class LessonView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text("A", style: TextStyle(fontSize: 50, color: Colors.green)),
-        Image.asset("lib/resources/assets/Study/images/dj.jpg", height: 200),
+        Image.asset("lib/core/resources/assets/Study/images/dj.jpg", height: 200),
         Text("Apple", style: TextStyle(fontSize: 24))
       ],
     );

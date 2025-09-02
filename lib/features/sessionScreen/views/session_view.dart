@@ -3,7 +3,7 @@ import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../../../resources/routes/routesName.dart';
+import '../../../core/resources/routes/routesName.dart';
 import '../controllers/session_controller.dart';
 
 class SessionView extends StatelessWidget {
@@ -65,7 +65,7 @@ class SessionView extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      // 1️⃣ First Column (Biggest) - Image/Animation
+                      // 1️⃣   First Column (Biggest) - Image/Animation
                       Expanded(
                           flex: 16, // Takes most of the space
                           child: DotLottieLoader.fromAsset(lesson.animationAsset,

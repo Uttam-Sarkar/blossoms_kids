@@ -2,7 +2,7 @@ import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../../../resources/routes/routesName.dart';
+import '../../../core/resources/routes/routesName.dart';
 import '../../base/controllers/base_controller.dart';
 import '../controllers/test_controller.dart';
 
@@ -51,7 +51,7 @@ class TestQuestionView extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: DotLottieLoader.fromAsset(
-                      "lib/resources/assets/Others/animations/confused.lottie",
+                      "lib/core/resources/assets/Others/animations/confused.lottie",
                       frameBuilder: (ctx, dotLottie) {
                     if (dotLottie != null) {
                       return Lottie.memory(dotLottie.animations.values.single);
@@ -129,9 +129,9 @@ class TestQuestionView extends StatelessWidget {
                   child: Center(
                     child: DotLottieLoader.fromAsset(
                         controller.isAnswerCorrect.value
-                            ? 'lib/resources/assets/Others/animations/tick-mark.lottie'
-                            : 'lib/resources/assets/Others/animations/crossmark.lottie',
-                        // "lib/resources/assets/Others/animations/confused.lottie",
+                            ? 'lib/core/resources/assets/Others/animations/tick-mark.lottie'
+                            : 'lib/core/resources/assets/Others/animations/crossmark.lottie',
+                        // "lib/core/resources/assets/Others/animations/confused.lottie",
                         frameBuilder: (ctx, dotLottie) {
                       if (dotLottie != null) {
                         return Lottie.memory(

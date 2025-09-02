@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:blossoms_kids/resources/colors/app_color.dart';
 import 'package:blossoms_kids/features/learnScreen/views/learn_screen_view.dart';
 
 
+import '../../../core/resources/colors/app_color.dart';
 import '../../end_drawer/views/app_drawer.dart';
 import '../../navigation/curved_nav_bar.dart';
 import '../../parentScreen/views/parent_screen_view.dart';
@@ -49,7 +49,7 @@ class BaseView extends StatelessWidget {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
         ),
       ),
-      endDrawer: const AppDrawer(),
+      endDrawer: AppDrawer(),
       body: Obx(() => pages[controller.selectedIndex.value]),
       bottomNavigationBar: CurvedNavBar(controller: controller),
     );
