@@ -95,7 +95,9 @@ class SessionView extends StatelessWidget {
                         flex: 5, // Small section
                         child: Center(
                           child: Text(
-                            lesson.lessonName,
+                            lesson.lessonName
+                                .toString()
+                                .tr, // Will Show in different language
                             style: TextStyle(
                               fontSize: 50,
                               fontWeight: FontWeight.bold,
@@ -122,7 +124,7 @@ class SessionView extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                'Next',
+                                'Next'.tr,
                                 style: TextStyle(
                                     fontSize: 30, color: Colors.white),
                               ),

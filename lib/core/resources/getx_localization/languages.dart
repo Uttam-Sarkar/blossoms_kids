@@ -1,25 +1,57 @@
-
 import 'package:get/get.dart';
 
-class Languages extends Translations{
+class Languages extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
-    'en_US' :{
-      'enter' : 'Enter',
-      'email_hint' : 'Email',
-      'password_hint' : 'Password',
-      'email' : 'Email',
-      'password' : 'Password',
-      'login' : 'Login',
-      'signup' : 'Sign Up',
-      'welcome_back' : 'Welcome\nBack',
-      'learn' : 'Learn',
-      'practice' : 'Practice',
-      'parents' : 'Parents',
-    },
-
-    'bn_BD' :{
-      'email_hint' : 'ইমেইল'
-    },
-  };
+        'en_US': {
+          'enter': 'Enter',
+          'email_hint': 'Email',
+          'password_hint': 'Password',
+          'email': 'Email',
+          'password': 'Password',
+          'login': 'Login',
+          'signup': 'Sign Up',
+          'welcome_back': 'Welcome\nBack',
+          'learn': 'Learn',
+          'practice': 'Practice',
+          'parents': 'Parents',
+          'Next': 'Next',
+          'Congratulations': 'Congratulations!',
+          'Next_Test': 'Next Test',
+          'Verify': 'Verify',
+          'Language': 'Language',
+          'Bangla': 'Bangla',
+          'Q': 'Queen',
+          'Shape Matching': 'Shape Matching',
+          'Balloon Blast': 'Balloon Blast',
+          'Living Skill': 'Living Skill',
+          'Family': 'Family',
+          'Study': 'Study',
+          'Emotion': 'Emotion',
+          'Profession': 'Profession',
+          'Music': 'Music',
+          'Psychological': 'Psychological',
+          'Social Skill': 'Social Skill',
+        },
+        'bn_BD': {
+          'email_hint': 'ইমেইল',
+          'Next': 'পরবর্তী',
+          'Congratulations': 'অভিনন্দন!',
+          'Next_Test': 'পরবর্তী পরীক্ষা',
+          'Verify': 'যাচাই করুন',
+          'Language': 'ভাষা',
+          'Bangla': 'বাংলা',
+          'Q': 'রাণী',
+          'Shape Matching': 'আকৃতি মিলানো',
+          'Balloon Blast': 'বেলুন ফাটানো',
+          'Living Skill': 'জীবন দক্ষতা',
+          'Family': 'পরিবার',
+          'Study': 'পড়াশোনা',
+          'Emotion': 'অনুভূতি',
+          'Profession': 'পেশা',
+          'Music': 'সঙ্গীত',
+          'Psychological': 'মনোবিজ্ঞান শিক্ষা',
+          'Social Skill': 'সামাজিক দক্ষতা',
+        },
+      };
 }

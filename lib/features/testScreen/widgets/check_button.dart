@@ -27,7 +27,7 @@ class CheckButton extends StatelessWidget {
             ),
           ),
           child: Text(
-            'Check',
+            'Verify'.tr,
             style: TextStyle(fontSize: 30, color: Colors.white),
           ),
         ),

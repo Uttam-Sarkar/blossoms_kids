@@ -100,7 +100,7 @@ class LearnScreenView extends StatelessWidget {
           itemBuilder: (context, index) {
             final item = learnItems[index];
             return LearnCard(
-              name: item['category'],
+              name: item['category'].toString().tr,
               image: File(item['image']),
               color: item['color'],
               onTap: () => controller.startSession(item['category']),

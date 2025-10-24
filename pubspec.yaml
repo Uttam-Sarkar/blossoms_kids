@@ -20,11 +20,13 @@ dependencies:
   firebase_auth: ^5.4.1
   # get: ^4.6.6
   google_sign_in: ^6.2.2
-#  flutter_facebook_auth: ^7.1.1
+  #  flutter_facebook_auth: ^7.1.1
   font_awesome_flutter: ^10.8.0
   shared_preferences: ^2.5.2
   dotlottie_loader: ^0.0.4
   lottie: 3.3.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
   path_provider: ^2.1.5
   http: ^1.5.0
@@ -43,48 +45,48 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-#  assets:
-#    - lib/resources/assets/images/
-#    - lib/core/resources/assets/Emotion/animations/
-#    - lib/core/resources/assets/Emotion/audio/
-#    - lib/core/resources/assets/Emotion/images/
-#    - lib/core/resources/assets/Emotion/sessions/
-#    - lib/core/resources/assets/Family/animations/
-#    - lib/core/resources/assets/Family/audio/
-#    - lib/core/resources/assets/Family/images/
-#    - lib/core/resources/assets/Family/sessions/
-#    - lib/core/resources/assets/Living Skill/animations/
-#    - lib/core/resources/assets/Living Skill/audio/
-#    - lib/core/resources/assets/Living Skill/images/
-#    - lib/core/resources/assets/Living Skill/sessions/
-#    - lib/core/resources/assets/Music/animations/
-#    - lib/core/resources/assets/Music/audio/
-#    - lib/core/resources/assets/Music/images/
-#    - lib/core/resources/assets/Music/sessions/
-#    - lib/core/resources/assets/Profession/animations/
-#    - lib/core/resources/assets/Profession/audio/
-#    - lib/core/resources/assets/Profession/images/
-#    - lib/core/resources/assets/Profession/sessions/
-#    - lib/core/resources/assets/Psychological/animations/
-#    - lib/core/resources/assets/Psychological/audio/
-#    - lib/core/resources/assets/Psychological/images/
-#    - lib/core/resources/assets/Psychological/sessions/
-#    - lib/core/resources/assets/Social Skill/animations/
-#    - lib/core/resources/assets/Social Skill/audio/
-#    - lib/core/resources/assets/Social Skill/images/
-#    - lib/core/resources/assets/Social Skill/sessions/
-#    - lib/core/resources/assets/Study/animations/
-#    - lib/core/resources/assets/Study/audio/
-#    - lib/core/resources/assets/Study/images/
-#    - lib/core/resources/assets/Study/sessions/
-#    - lib/core/resources/assets/Others/animations/
-#    - lib/core/resources/assets/Others/audio/
-#    - lib/core/resources/assets/Others/images/
+  #  assets:
+  #    - lib/resources/assets/images/
+  #    - lib/core/resources/assets/Emotion/animations/
+  #    - lib/core/resources/assets/Emotion/audio/
+  #    - lib/core/resources/assets/Emotion/images/
+  #    - lib/core/resources/assets/Emotion/sessions/
+  #    - lib/core/resources/assets/Family/animations/
+  #    - lib/core/resources/assets/Family/audio/
+  #    - lib/core/resources/assets/Family/images/
+  #    - lib/core/resources/assets/Family/sessions/
+  #    - lib/core/resources/assets/Living Skill/animations/
+  #    - lib/core/resources/assets/Living Skill/audio/
+  #    - lib/core/resources/assets/Living Skill/images/
+  #    - lib/core/resources/assets/Living Skill/sessions/
+  #    - lib/core/resources/assets/Music/animations/
+  #    - lib/core/resources/assets/Music/audio/
+  #    - lib/core/resources/assets/Music/images/
+  #    - lib/core/resources/assets/Music/sessions/
+  #    - lib/core/resources/assets/Profession/animations/
+  #    - lib/core/resources/assets/Profession/audio/
+  #    - lib/core/resources/assets/Profession/images/
+  #    - lib/core/resources/assets/Profession/sessions/
+  #    - lib/core/resources/assets/Psychological/animations/
+  #    - lib/core/resources/assets/Psychological/audio/
+  #    - lib/core/resources/assets/Psychological/images/
+  #    - lib/core/resources/assets/Psychological/sessions/
+  #    - lib/core/resources/assets/Social Skill/animations/
+  #    - lib/core/resources/assets/Social Skill/audio/
+  #    - lib/core/resources/assets/Social Skill/images/
+  #    - lib/core/resources/assets/Social Skill/sessions/
+  #    - lib/core/resources/assets/Study/animations/
+  #    - lib/core/resources/assets/Study/audio/
+  #    - lib/core/resources/assets/Study/images/
+  #    - lib/core/resources/assets/Study/sessions/
+  #    - lib/core/resources/assets/Others/animations/
+  #    - lib/core/resources/assets/Others/audio/
+  #    - lib/core/resources/assets/Others/images/
 
-#    - lib/resources/assets/Others/sessions/
+  #    - lib/resources/assets/Others/sessions/
 
-#    - lib/resources/assets/Study/sessions/sessions1.json
-#    - lib/resources/assets/Study/sessions/sessions1.json
+  #    - lib/resources/assets/Study/sessions/sessions1.json
+  #    - lib/resources/assets/Study/sessions/sessions1.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

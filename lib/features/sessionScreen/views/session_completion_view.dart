@@ -31,7 +31,7 @@ class SessionCompletionView extends StatelessWidget {
                     Icon(Icons.check_circle, size: 100, color: Colors.green),
                     SizedBox(height: 20),
                     Text(
-                      'Congratulations!',
+                      'Congratulations'.tr,
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),

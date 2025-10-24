@@ -9,7 +9,7 @@ class NextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 40,right: 40,top: 16,bottom: 16),
+      padding: const EdgeInsets.only(left: 40, right: 40, top: 16, bottom: 16),
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
@@ -20,10 +20,10 @@ class NextButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
-          child: Text('Next',
+          child: Text(
+            'Next'.tr,
             style: TextStyle(fontSize: 30, color: Colors.white),
           ),
-
         ),
       ),
     );
