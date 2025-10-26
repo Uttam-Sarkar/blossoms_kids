@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 class LanguageController extends GetxController {
   var selectedLanguage = 'English'.obs;
   final List<String> languages = ['English', 'Bangla', 'Hindi', 'German'];
+  late Box box;
 
   @override
   void onInit() {
@@ -14,13 +15,12 @@ class LanguageController extends GetxController {
   }
 
   void loadLanguage() async {
-    var box = Hive.box('settings');
+    box = Hive.box('settings');
     selectedLanguage.value = box.get('language', defaultValue: 'English');
     language(selectedLanguage.value);
   }
 
   void saveLanguage(String lang) async {
-    var box = Hive.box('settings');
     await box.put('language', lang);
     selectedLanguage.value = lang;
     Get.updateLocale(language(lang));
