@@ -75,16 +75,27 @@ class SessionView extends StatelessWidget {
                       // 1️⃣   First Column (Biggest) - Image/Animation
                       Expanded(
                         flex: 16, // Takes most of the space
-                        child: DotLottieLoader.fromFile(
-                            File(assetsPath + lesson.animationAsset),
-                            frameBuilder: (ctx, dotlottie) {
-                          if (dotlottie != null) {
-                            return Lottie.memory(
-                                dotlottie.animations.values.single);
-                          } else {
-                            return Container();
-                          }
-                        }),
+
+                        child: GestureDetector(
+                          onTap: () {
+                            final path = assetsPath + lesson.soundAsset!;
+                            print("Local sound path: $path");
+                            controller.playSound(path);
+                          },
+                          child: DotLottieLoader.fromFile(
+                              File(assetsPath + lesson.animationAsset),
+                              frameBuilder: (ctx, dotlottie) {
+                            final path = assetsPath + lesson.audioAsset!;
+                            controller.playAudio(path);
+
+                            if (dotlottie != null) {
+                              return Lottie.memory(
+                                  dotlottie.animations.values.single);
+                            } else {
+                              return Container();
+                            }
+                          }),
+                        ),
                         // child: Center(
                         //   child: Image.asset(lesson!.imageAsset),
                         // )
@@ -112,22 +123,47 @@ class SessionView extends StatelessWidget {
                         // child: Container(color: Colors.red,),
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 40, right: 40, top: 16, bottom: 16),
+                              left: 20, right: 40, top: 10, bottom: 16),
                           child: SizedBox(
                             width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: controller.goToNextLesson,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                    onPressed: () {
+                                      final path =
+                                          assetsPath + lesson.audioAsset!;
+                                      controller.playAudio(path);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.green,
+                                      shape: CircleBorder(),
+                                      padding: const EdgeInsets.all(14),
+                                    ),
+                                    child: Icon(Icons.volume_up,
+                                        size: 30, color: Colors.white)),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: ElevatedButton(
+                                    onPressed: controller.goToNextLesson,
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.green,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      // minimumSize: Size(double.infinity, 60),
+                                      // maximumSize: Size(300, 60),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 7),
+                                    ),
+                                    child: Text(
+                                      'Next'.tr,
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              child: Text(
-                                'Next'.tr,
-                                style: TextStyle(
-                                    fontSize: 30, color: Colors.white),
-                              ),
+                              ],
                             ),
                           ),
                         ),

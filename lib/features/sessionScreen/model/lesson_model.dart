@@ -2,13 +2,15 @@ class Lesson {
   final String lessonName;
   final String imageAsset;
   final String animationAsset;
-  final String audioAsset;
+  final String? audioAsset;
+  final String? soundAsset;
 
-  Lesson({
+  Lesson( {
     required this.lessonName,
     required this.imageAsset,
     required this.animationAsset,
-    required this.audioAsset,
+    this.audioAsset,
+    this.soundAsset,
   });
 
   factory Lesson.fromJson(Map<String, dynamic> json) {
@@ -17,6 +19,7 @@ class Lesson {
       imageAsset: json['imageAsset'],
       animationAsset: json['animationAsset'],
       audioAsset: json['audioAsset'],
+      soundAsset: json['soundAsset'],
     );
   }
 }

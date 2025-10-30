@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 
 // import 'package:flutter/services.dart';
@@ -215,7 +216,34 @@ class SessionController extends GetxController {
       print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
     }
   }
+// audio
+  final AudioPlayer audioPlayer = AudioPlayer();
+  final AudioPlayer soundPlayer = AudioPlayer();
 
+  Future<void> playAudio(String audioPath) async {
+    // await audioPlayer.play(AssetSource(audioPath));
+    try {
+      await audioPlayer.play(DeviceFileSource(audioPath));
+      print("Playing local audio from: $audioPath");
+    } catch (e) {
+      print("Error playing local sound: $e");
+    }
+  }
+
+  Future<void> playSound(String soundPath) async {
+    try {
+      await soundPlayer.play(DeviceFileSource(soundPath));
+      print("Playing local sound from: $soundPath");
+    } catch (e) {
+      print("Error playing local sound: $e");
+    }
+  }
+
+
+  void disposePlayers() {
+    audioPlayer.dispose();
+    soundPlayer.dispose();
+  }
 // Move to previous lesson in the session
 // void goToPreviousLesson() {
 //   if (currentLessonIndex.value > 0) {
