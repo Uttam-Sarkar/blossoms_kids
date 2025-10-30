@@ -26,17 +26,17 @@ class LearnScreenView extends StatelessWidget {
         }
 
         final List<Map<String, dynamic>> learnItems = [
+          // {
+          //   "category": "Shape Matching",
+          //   "image": "$assetsPath/assets/Others/images/shape.jpg",
+          //   "color": AppColor.cardGreenColor,
+          //   "route": RoutesName.shapeMatching
+          // },
           {
-            "category": "Shape Matching",
-            "image": "$assetsPath/assets/Others/images/shape.jpg",
-            "color": AppColor.cardGreenColor,
-            "route": RoutesName.shapeMatching
-          },
-          {
-            "category": "Balloon Blast",
+            "category": "Fruits Slice",
             "image": "$assetsPath/assets/Others/images/balloonBlast.jpg",
             "color": AppColor.cardOrangeColor,
-            "route": RoutesName.balloonBlast
+            "route": RoutesName.fruitsSlice
           },
           {
             "category": "Living Skill",
@@ -62,30 +62,30 @@ class LearnScreenView extends StatelessWidget {
             "color": AppColor.cardGreenColor,
             "route": RoutesName.emotion
           },
-          {
-            "category": "Profession",
-            "image": "$assetsPath/assets/Others/images/profession.jpg",
-            "color": AppColor.cardOrangeColor,
-            "route": RoutesName.profession
-          },
-          {
-            "category": "Music",
-            "image": "$assetsPath/assets/Others/images/music.jpg",
-            "color": AppColor.cardRedColor,
-            "route": RoutesName.music
-          },
-          {
-            "category": "Psychological",
-            "image": "$assetsPath/assets/Others/images/psychological.jpg",
-            "color": AppColor.cardPurpleColor,
-            "route": RoutesName.psychologicalEducation
-          },
-          {
-            "category": "Social Skill",
-            "image": "$assetsPath/assets/Others/images/communication.jpg",
-            "color": AppColor.cardYellowColor,
-            "route": RoutesName.socialAndCommunicationSkill
-          },
+          // {
+          //   "category": "Profession",
+          //   "image": "$assetsPath/assets/Others/images/profession.jpg",
+          //   "color": AppColor.cardOrangeColor,
+          //   "route": RoutesName.profession
+          // },
+          // {
+          //   "category": "Music",
+          //   "image": "$assetsPath/assets/Others/images/music.jpg",
+          //   "color": AppColor.cardRedColor,
+          //   "route": RoutesName.music
+          // },
+          // {
+          //   "category": "Psychological",
+          //   "image": "$assetsPath/assets/Others/images/psychological.jpg",
+          //   "color": AppColor.cardPurpleColor,
+          //   "route": RoutesName.psychologicalEducation
+          // },
+          // {
+          //   "category": "Social Skill",
+          //   "image": "$assetsPath/assets/Others/images/communication.jpg",
+          //   "color": AppColor.cardYellowColor,
+          //   "route": RoutesName.socialAndCommunicationSkill
+          // },
         ];
 
         return GridView.builder(

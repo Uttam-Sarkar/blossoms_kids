@@ -40,7 +40,8 @@ class SessionController extends GetxController {
 
       // return jsonData["total_session"];
       final assetsPath = Get.find<AssetController>().assetsPath.value;
-      final file = File('$assetsPath/assets/$category/sessions/totalSession.json');
+      final file =
+          File('$assetsPath/assets/$category/sessions/totalSession.json');
       if (!await file.exists()) return 0;
 
       final jsonString = await file.readAsString();
@@ -136,35 +137,41 @@ class SessionController extends GetxController {
 
   /// Load a session from assets
   Future<void> startSession(String category) async {
-    currentLessonIndex.value = 0;
-    currentCategory = category;
-    int sessionLevel = currentSessionLevel[category] ?? 1;
+    if (category == "Fruits Slice") {
+      Get.toNamed(RoutesName.fruitsSlice);
+    } else {
+      currentLessonIndex.value = 0;
+      currentCategory = category;
+      int sessionLevel = currentSessionLevel[category] ?? 1;
 
-    try {
-      // Load JSON file
-      // String jsonString = await rootBundle.loadString("lib/core/resources/assets/$category/sessions/sessions$sessionLevel.json");
-      // Map<String, dynamic> jsonData = jsonDecode(jsonString);
-      final assetsPath = Get.find<AssetController>().assetsPath.value;
-      final file = File(
-          '$assetsPath/assets/$category/sessions/sessions$sessionLevel.json');
-      // /data/user/0/com.example.blossoms_kids/app_flutter/blossom_assets
+      try {
+        // Load JSON file
+        // String jsonString = await rootBundle.loadString("lib/core/resources/assets/$category/sessions/sessions$sessionLevel.json");
+        // Map<String, dynamic> jsonData = jsonDecode(jsonString);
+        final assetsPath = Get.find<AssetController>().assetsPath.value;
+        final file = File(
+            '$assetsPath/assets/$category/sessions/sessions$sessionLevel.json');
+        // /data/user/0/com.example.blossoms_kids/app_flutter/blossom_assets
 
-      if (!await file.exists()) {
-        throw Exception("Session JSON not found: ${file.path}");
-      }
+        if (!await file.exists()) {
+          throw Exception("Session JSON not found: ${file.path}");
+        }
 
-      final jsonString = await file.readAsString();
-      final jsonData = await compute(_parseJsonInBackground, jsonString);
+        final jsonString = await file.readAsString();
+        final jsonData = await compute(_parseJsonInBackground, jsonString);
 
-      // Convert JSON to Session object and update state
-      currentSession.value = Session.fromJson(jsonData);
-      lessonLength = currentSession.value!.lessons.length;
-      // 'sessionLevel': currentSessionLevel[category], //for next line
-      Get.toNamed(RoutesName.sessionView,
-          arguments: {'category': category, 'currentSession': currentSession});
-    } catch (e) {
-      if (kDebugMode) {
-        print("Error loading session: $e");
+        // Convert JSON to Session object and update state
+        currentSession.value = Session.fromJson(jsonData);
+        lessonLength = currentSession.value!.lessons.length;
+        // 'sessionLevel': currentSessionLevel[category], //for next line
+        Get.toNamed(RoutesName.sessionView, arguments: {
+          'category': category,
+          'currentSession': currentSession
+        });
+      } catch (e) {
+        if (kDebugMode) {
+          print("Error loading session: $e");
+        }
       }
     }
   }
@@ -216,6 +223,7 @@ class SessionController extends GetxController {
       print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
     }
   }
+
 // audio
   final AudioPlayer audioPlayer = AudioPlayer();
   final AudioPlayer soundPlayer = AudioPlayer();
@@ -238,7 +246,6 @@ class SessionController extends GetxController {
       print("Error playing local sound: $e");
     }
   }
-
 
   void disposePlayers() {
     audioPlayer.dispose();

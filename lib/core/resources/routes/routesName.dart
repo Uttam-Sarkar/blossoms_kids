@@ -12,7 +12,7 @@ class RoutesName {
   static const String parentScreen = '/parent';
 
   static const String shapeMatching = '/shape_matching';
-  static const String balloonBlast = '/balloon_blast';
+  static const String fruitsSlice = '/fruits_slice';
   static const String livingSkill = '/living_skill';
   static const String family = '/family';
   static const String study = '/Study';
@@ -28,6 +28,8 @@ class RoutesName {
   static const String testCompletion = '/test_completion';
   static const String testQuestionView = '/test_question_view';
   static const String testScreen = '/test_screen';
+
+  static const String gameMain = '/game_main';
 
 
 }
