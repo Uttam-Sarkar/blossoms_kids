@@ -22,6 +22,7 @@ import '../../../features/learnScreen/views/learn_screen_view.dart';
 // import '../../../features/learn_item_screen/shape_matching/views/shape_matching_screen.dart';
 // import '../../../features/learn_item_screen/social_skill/views/social_skill_screen.dart';
 // import '../../../features/learn_item_screen/study/views/study_screen.dart';
+import '../../../features/parentScreen/views/autism_test.dart';
 import '../../../features/parentScreen/views/parent_screen_view.dart';
 import '../../../features/practiceScreen/views/practice_screen_view.dart';
 import '../../../features/sessionScreen/views/session_view.dart';
@@ -165,6 +166,16 @@ class AppRoutes {
     GetPage(
       name: RoutesName.testCompletion,
       page: () => TestCompletionView(),
+    ),
+
+    GetPage(
+      name: RoutesName.parentScreen,
+      page: () => ParentScreenView(),
+    ),
+
+    GetPage(
+      name: RoutesName.autismTestScreen,
+      page: () => const AutismTest(),
     ),
 
 

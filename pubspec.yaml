@@ -56,6 +56,8 @@ flutter:
   assets:
     - lib/features/fruits_slice/images/
     - assets/images/
+    - assets/json data/
+    - assets/sounds/
 
   #    - lib/resources/assets/images/
   #    - lib/core/resources/assets/Emotion/animations/

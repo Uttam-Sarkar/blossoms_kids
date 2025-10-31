@@ -29,6 +29,9 @@ class RoutesName {
   static const String testQuestionView = '/test_question_view';
   static const String testScreen = '/test_screen';
 
+  static const String autismTestScreen = '/autism_test_screen';
+
+
   static const String gameMain = '/game_main';
 
 
