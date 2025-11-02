@@ -5,13 +5,13 @@ import 'package:get/get.dart';
 import '../../../core/resources/routes/routesName.dart';
 import '../../../core/shared/widgets/custom_button.dart';
 import '../controllers/autism_controller.dart';
-import '../controllers/tip_controller.dart';
+import '../controllers/tips_controller.dart';
 import '../widgets/tips_card.dart';
 
 class ParentScreenView extends StatelessWidget {
   ParentScreenView({super.key});
   final AutismController controller = Get.put(AutismController());
-  final TipController tipController = Get.put(TipController());
+  final TipsController tipController = Get.put(TipsController());
 
 
   @override

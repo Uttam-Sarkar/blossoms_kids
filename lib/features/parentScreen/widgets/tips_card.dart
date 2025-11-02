@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 class TipCard extends StatelessWidget {
   final String title;
   final String description;
@@ -23,12 +24,12 @@ class TipCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title,
+                  Text(title.tr,
                       style: const TextStyle(
                           fontSize: 16, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
                   Text(
-                    description,
+                    description.tr,
                     style: const TextStyle(fontSize: 14, color: Colors.black87),
                   ),
                 ],

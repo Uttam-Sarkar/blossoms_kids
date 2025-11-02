@@ -31,7 +31,7 @@ class BaseView extends StatelessWidget {
       key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: AppColor.appBarColor,
-        title: const Text("Blossoms Kids",style: TextStyle(color: AppColor.primaryTextColor),),
+        title: Text("Blossoms Kids".tr,style: TextStyle(color: AppColor.primaryTextColor),),
 
           leading: Container(),
           actions: [
