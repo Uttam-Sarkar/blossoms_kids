@@ -1,0 +1,266 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/foundation.dart';
+
+// import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../core/resources/routes/routesName.dart';
+import '../../assets/controllers/assets_controller.dart';
+import '../model/session_model.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+
+class SessionController extends GetxController {
+  var currentSessionLevel = <String, int>{}.obs;
+  var totalSession = <String, int>{}.obs;
+  var currentLessonIndex = 0.obs;
+  var currentCategory = '';
+  int lessonLength = 0;
+
+  /// For test Screen
+  // var testCurrentSessionLevel = <String, int>{}.obs;
+  // var testCurrentLessonIndex = 0.obs;
+
+  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // final String userId = "user_id"; // Replace with actual user ID from FirebaseAuth
+
+  @override
+  void onInit() {
+    super.onInit();
+    loadAllSessionLevelTestSessionLevelTotalSession(); // Load session data when the app starts
+  }
+
+  /// Get total session under a category
+  Future<int> getTotalSessions(String category) async {
+    try {
+      // String jsonString = await rootBundle.loadString("lib/core/resources/assets/$category/sessions/totalSession.json");
+      // Map<String, dynamic> jsonData = jsonDecode(jsonString);
+
+      // return jsonData["total_session"];
+      final assetsPath = Get.find<AssetController>().assetsPath.value;
+      final file =
+          File('$assetsPath/assets/$category/sessions/totalSession.json');
+      if (!await file.exists()) return 0;
+
+      final jsonString = await file.readAsString();
+      final jsonData = await compute(_parseJsonInBackground, jsonString);
+      return jsonData["total_session"];
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error loading session index: $e");
+      }
+      return 0;
+    }
+  }
+
+  /// Load session progress from SharedPreferences
+  Future<void> loadAllSessionLevelTestSessionLevelTotalSession() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> categories = [
+      "Emotion",
+      "Family",
+      "Living Skill",
+      "Music",
+      "Profession",
+      "Psychological",
+      "Social Skill",
+      "Study"
+    ]; // Add all categories
+
+    for (var category in categories) {
+      int sessionLevel =
+          prefs.getInt('session_$category') ?? 1; // Default sessionLevel is 1
+      // int testSessionLevel = prefs.getInt('testSession_$category') ?? 1;// Default sessionLevel is 1
+
+      var totalSessions = await getTotalSessions(category);
+      currentSessionLevel[category] = sessionLevel;
+      totalSession[category] = totalSessions;
+      // testCurrentSessionLevel[category] = testSessionLevel;
+    }
+
+    // await fetchSessionsFromFirebase(); // Fetch sessionLevel progress from Firebase
+  }
+
+  /// Save session progress locally
+  Future<void> saveSession(String category, int sessionNumber) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('session_$category', sessionNumber);
+    currentSessionLevel[category] = sessionNumber;
+  }
+
+  // Future<void> testSaveSession(String category, int testSessionNumber) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   prefs.setInt('testSession_$category', testSessionNumber);
+  //   testCurrentSessionLevel[category] = testSessionNumber;
+  //
+  //   // if (sessionNumber % 5 == 0) {
+  //   //   updateSessionInFirebase(category, sessionNumber); // Sync every 5 sessions
+  //   // }
+  // }
+
+  /// Fetch session progress from Firebase when logging in on a new device
+  // Future<void> fetchSessionsFromFirebase() async {
+  //   var doc = await _firestore.collection('userProgress').doc(userId).get();
+  //
+  //   if (doc.exists) {
+  //     Map<String, dynamic> data = doc.data()!;
+  //     data.forEach((category, session) {
+  //       currentSessions[category] = session; // Update local session values
+  //     });
+  //
+  //     // Save fetched sessions to SharedPreferences
+  //     final prefs = await SharedPreferences.getInstance();
+  //     data.forEach((category, session) {
+  //       prefs.setInt('session_$category', session);
+  //     });
+  //   }
+  // }
+
+  /// Update Firebase with the latest session progress
+  // Future<void> updateSessionInFirebase(String category, int sessionNumber) async {
+  //   await _firestore.collection('userProgress').doc(userId).set(
+  //     {category: sessionNumber}, SetOptions(merge: true),
+  //   );
+  // }
+
+  /// Start the session for the selected category
+  // void startSession(String category) {
+  //   int session = currentSessionLevel[category] ?? 1;
+  //
+  //
+  //   Get.toNamed(RoutesName.sessionPage, arguments: {'category': category, 'session': sessionLevel});
+  // }
+
+  var currentSession = Rxn<Session>(); // Holds the current session data
+
+  /// Load a session from assets
+  Future<void> startSession(String category) async {
+    if (category == "Fruits Slice") {
+      Get.toNamed(RoutesName.fruitsSlice);
+    } else {
+      currentLessonIndex.value = 0;
+      currentCategory = category;
+      int sessionLevel = currentSessionLevel[category] ?? 1;
+
+      try {
+        // Load JSON file
+        // String jsonString = await rootBundle.loadString("lib/core/resources/assets/$category/sessions/sessions$sessionLevel.json");
+        // Map<String, dynamic> jsonData = jsonDecode(jsonString);
+        final assetsPath = Get.find<AssetController>().assetsPath.value;
+        final file = File(
+            '$assetsPath/assets/$category/sessions/sessions$sessionLevel.json');
+        // /data/user/0/com.example.blossoms_kids/app_flutter/blossom_assets
+
+        if (!await file.exists()) {
+          throw Exception("Session JSON not found: ${file.path}");
+        }
+
+        final jsonString = await file.readAsString();
+        final jsonData = await compute(_parseJsonInBackground, jsonString);
+
+        // Convert JSON to Session object and update state
+        currentSession.value = Session.fromJson(jsonData);
+        lessonLength = currentSession.value!.lessons.length;
+        // 'sessionLevel': currentSessionLevel[category], //for next line
+        Get.toNamed(RoutesName.sessionView, arguments: {
+          'category': category,
+          'currentSession': currentSession
+        });
+      } catch (e) {
+        if (kDebugMode) {
+          print("Error loading session: $e");
+        }
+      }
+    }
+  }
+
+  // var currentLessonIndex = 0.obs;
+
+  // Move to next lesson in the session
+  // void goToNextSesson() {
+  //   if (currentSessionLevel.value != null && currentLessonIndex.value < lessonLength - 1) {
+  //     currentLessonIndex.value++;
+  //   }
+  // }
+  //
+  // // Move to previous lesson in the session
+  // void goToPreviousSession() {
+  //   if (currentLessonIndex.value > 0) {
+  //     currentLessonIndex.value--;
+  //   }
+  // }
+
+  var showCompletionScreen = false.obs;
+
+  Future<void> goToNextLesson() async {
+    if (currentLessonIndex.value == lessonLength - 1) {
+      if (showCompletionScreen == false) {
+        showCompletionScreen.value = true;
+        Get.toNamed(RoutesName.sessionCompletion);
+      } else {
+        showCompletionScreen.value = false;
+        String category = currentCategory;
+        var sessionLevel = currentSessionLevel[category];
+        var totalSessions = totalSession[category];
+
+        if (totalSessions! > sessionLevel!) {
+          await saveSession(category, sessionLevel + 1);
+          startSession(category);
+        } else {
+          currentSessionLevel[category] = 1;
+          startSession(category);
+        }
+      }
+      // startSession(category);
+
+      print(
+          'session change lesson index = $currentLessonIndex lessonLength = $lessonLength');
+      // print('category = $category session level = $sessionLevel total session = $totalSessions');
+    } else if (currentLessonIndex.value < lessonLength - 1) {
+      currentLessonIndex.value++;
+      print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
+    }
+  }
+
+// audio
+  final AudioPlayer audioPlayer = AudioPlayer();
+  final AudioPlayer soundPlayer = AudioPlayer();
+
+  Future<void> playAudio(String audioPath) async {
+    // await audioPlayer.play(AssetSource(audioPath));
+    try {
+      await audioPlayer.play(DeviceFileSource(audioPath));
+      print("Playing local audio from: $audioPath");
+    } catch (e) {
+      print("Error playing local sound: $e");
+    }
+  }
+
+  Future<void> playSound(String soundPath) async {
+    try {
+      await soundPlayer.play(DeviceFileSource(soundPath));
+      print("Playing local sound from: $soundPath");
+    } catch (e) {
+      print("Error playing local sound: $e");
+    }
+  }
+
+  void disposePlayers() {
+    audioPlayer.dispose();
+    soundPlayer.dispose();
+  }
+// Move to previous lesson in the session
+// void goToPreviousLesson() {
+//   if (currentLessonIndex.value > 0) {
+//     currentLessonIndex.value--;
+//     print('lesson index = $currentLessonIndex lessonLength = $lessonLength');
+//   }
+// }
+}
+
+/// Helper function for parsing JSON off the main thread
+Map<String, dynamic> _parseJsonInBackground(String jsonString) {
+  return jsonDecode(jsonString);
+}
